@@ -179,9 +179,19 @@ def learn_words():
         formal = row[2]
         hint_number = 0
         try_number = 0
+        formality = ""
+
+        if formal == "0":
+            formality = "no"
+        elif formal == "1":
+            formality = "yes"
 
         while True:
-            print(f"Enter the {lang_name} word for {word}")
+            if formal != "2":
+                print(f"Enter the {lang_name} word for {word}. Formal?: " + colored(formality, "cyan"))
+            else:
+                print(f"Enter the {lang_name} word for {word}.")
+
             print(colored(" ╰─> ", "cyan"), end="")
 
             usrinput = input().lower()
@@ -359,6 +369,7 @@ def settings_change():
 
     print(colored("Settings", "magenta"))
     print("1. Change default language")
+    print("2. Toggle formality on/off (showing if the word is formal or not)")
 
 
     while True:
@@ -388,6 +399,26 @@ def settings_change():
                 pass
             else:
                 print(colored("error", "red") + f": {usrinput}: ivalid language number/name/code.")
+        elif usrinput == "2":
+            t = 0
+
+            if settings_file["formality"] == False:
+                print("This feature is turned off. Turn it on? [Y/n] ")
+                t = 1
+            else:
+                print("This feature is turned on. Turn it off? [Y/n] ")
+
+            usrinput = input(colored("  ==> ", "cyan"))
+
+            if usrinput == "" or usrinput == "y" or usrinput == "yes":
+                if t == 0:
+                    settings_file["formality"] = False
+                else:
+                    settings_file["formality"] = True
+
+                print("Successfully changed to " + colored(settings_file["formality"], "cyan") + ".")
+            else:
+                pass
         else:
             print(colored("error", "red") + f": {usrinput}: ivalid choice.")
 
