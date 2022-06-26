@@ -403,12 +403,12 @@ def settings_change():
             t = 0
 
             if settings_file["formality"] == False:
-                print("This feature is turned off. Turn it on? [Y/n] ")
+                print("This feature is turned off. Turn it on? [Y/n] ", end="")
                 t = 1
             else:
-                print("This feature is turned on. Turn it off? [Y/n] ")
+                print("This feature is turned on. Turn it off? [Y/n] ", end="")
 
-            usrinput = input(colored("  ==> ", "cyan"))
+            usrinput = input()
 
             if usrinput == "" or usrinput == "y" or usrinput == "yes":
                 if t == 0:
@@ -419,6 +419,8 @@ def settings_change():
                 print("Successfully changed to " + colored(settings_file["formality"], "cyan") + ".")
             else:
                 pass
+        elif usrinput == "exit":
+            break
         else:
             print(colored("error", "red") + f": {usrinput}: ivalid choice.")
 
