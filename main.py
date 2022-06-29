@@ -17,7 +17,7 @@ def main():
     while True:
         functions.clear()
 
-        print("Welcome")
+        print("Welcome!")
         print("1. Learn words")
         print("2. View words")
         print("3. Add words (WIP)")

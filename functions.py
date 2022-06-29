@@ -141,13 +141,36 @@ def learn_words():
     elif lang == "de":
         print("Choose a category: ")
         print("1. All words")
+        print("2. Colours")
+        print("3. Days")
+        print("4. Food")
+        print("5. Months")
+        print("6. Numbers")
+        print("7. Numbers (extended)")
 
         while True:
             usrinput = input(colored(" ==> ", "cyan")).lower()
 
             if usrinput == "1":
                 name = "all"
-
+                break
+            elif usrinput == "2":
+                name = "colours"
+                break
+            elif usrinput == "3":
+                name = "days"
+                break
+            elif usrinput == "4":
+                name = "food"
+                break
+            elif usrinput == "5":
+                name = "months"
+                break
+            elif usrinput == "6":
+                name = "numbers"
+                break
+            elif usrinput == "7":
+                name = "numbers_full"
                 break
             elif usrinput == "clear":
                 clear()
@@ -161,15 +184,13 @@ def learn_words():
             else:
                 print(colored("error", "red") + f": {usrinput}: invalid option.")
             
+        if q == 1:
+            return
         
         words = load_words(lang, name)
 
-        if q == 1:
-            return
-
     if q == 1:
         return
-    
 
     rows, fields = load_words(lang, name)
 
@@ -177,9 +198,16 @@ def learn_words():
         word = row[0]
         lword = row[1]
         formal = row[2]
+        article = row[3]
+        articles = settings_file["grammatical_articles"]
         hint_number = 0
         try_number = 0
         formality = ""
+
+        if article.lower() not in ["das", "die", "der"]:
+            articles = False
+        else:
+            pass
 
         if formal == "0":
             formality = "no"
@@ -188,43 +216,77 @@ def learn_words():
 
         while True:
             if formal != "2":
-                print(f"Enter the {lang_name} word for {word}. Formal?: " + colored(formality, "cyan"))
+                if articles == True:
+                    print(f"Enter the {lang_name} word for " + colored(word, "magenta") + " with the proper grammatical article. Formal?: " + colored(formality, "cyan"))
+                else:
+                    print(f"Enter the {lang_name} word for " + colored(word, "magenta") + " with the proper grammatical article. Formal?: " + colored(formality, "cyan"))
             else:
-                print(f"Enter the {lang_name} word for {word}.")
+                if articles == True:
+                    print(f"Enter the {lang_name} word for " + colored(word, "magenta") + " with the proper grammatical article.")
+                else:
+                    print(f"Enter the {lang_name} word for " + colored(word, "magenta") + ".")
 
             print(colored(" ╰─> ", "cyan"), end="")
 
             usrinput = input().lower()
 
-            if usrinput == lword.lower():
-                print(colored("Correct", "green") + "!")
-
-                break
-            elif usrinput == "hint":
-                hints = 3
-
-                if len(lword) <= hints:
-                    hints = len(lword) - 1
-                else:
-                    pass
-
-
-                if hint_number < hints:
-                    print(colored("Hint", "magenta") + f": {lword[hint_number]}")
-                    hint_number += 1
-                else:
-                    print("No hints left")
-            elif usrinput == "exit":
-                q = 1
-                break
-            else:
-                try_number += 1
-
-                if try_number <= 2:
-                    print(colored("Incorrect", "red") + ". Try again.")
-                else:
-                    print(colored("Incorrect", "red") + ". The right answer was: " + colored(lword, "cyan"))
+            if articles == True:
+                if usrinput == article + " " + lword.lower():
+                    print(colored("Correct", "green") + "!")
                     break
+                elif usrinput == "hint":
+                    hints = 3
+
+                    if len(lword) <= hints:
+                        hints = len(lword) - 1
+                    else:
+                        pass
+
+
+                    if hint_number < hints:
+                        print(colored("Hint", "magenta") + f": {lword[hint_number]}")
+                        hint_number += 1
+                    else:
+                        print("No hints left")
+                elif usrinput == "exit":
+                    q = 1
+                    break
+                else:
+                    try_number += 1
+
+                    if try_number <= 2:
+                        print(colored("Incorrect", "red") + ". Try again.")
+                    else:
+                        print(colored("Incorrect", "red") + ". The right answer was: " + colored(article, "cyan"), colored(lword, "cyan"))
+                        break
+            else:
+                if usrinput == lword.lower():
+                    print(colored("Correct", "green") + "!")
+                    break
+                elif usrinput == "hint":
+                    hints = 3
+
+                    if len(lword) <= hints:
+                        hints = len(lword) - 1
+                    else:
+                        pass
+
+                    if hint_number < hints:
+                        print(colored("Hint", "magenta") + f": {lword[hint_number]}")
+                        hint_number += 1
+                    else:
+                        print("No hints left")
+                elif usrinput == "exit":
+                    q = 1
+                    break
+                else:
+                    try_number += 1
+
+                    if try_number <= 2:
+                        print(colored("Incorrect", "red") + ". Try again.")
+                    else:
+                        print(colored("Incorrect", "red") + ". The right answer was: " + colored(lword, "cyan"))
+                        break
         
         if q == 1:
             break
@@ -329,15 +391,37 @@ def view_words():
     elif lang == "de":
         print("Choose a category: ")
         print("1. All words")
+        print("2. Colours")
+        print("3. Days")
+        print("4. Food")
+        print("5. Months")
+        print("6. Numbers")
+        print("7. Numbers (extended)")
 
         while True:
             usrinput = input(colored(" ==> ", "cyan")).lower()
 
             if usrinput == "1":
                 name = "all"
-
                 break
-            
+            elif usrinput == "2":
+                name = "colours"
+                break
+            elif usrinput == "3":
+                name = "days"
+                break
+            elif usrinput == "4":
+                name = "food"
+                break
+            elif usrinput == "5":
+                name = "months"
+                break
+            elif usrinput == "6":
+                name = "numbers"
+                break
+            elif usrinput == "7":
+                name = "numbers_full"
+                break
             elif usrinput == "clear":
                 clear()
                 print("Select language:")
@@ -354,75 +438,24 @@ def view_words():
             return
 
     rows, fields = load_words(lang, name)
+    articles = settings_file["grammatical_articles"]
 
     i = 0
     for row in rows:
-        print(colored(i + 1, "green") + ".", colored(row[0], "blue"), "-", colored(row[1], "cyan"))
+        article = row[3]
+        if article not in ["das", "die", "der"]:
+            articles = False
+        else:
+            pass
+
+        if articles == True:
+            print(colored(i + 1, "green") + ".", colored(row[0], "blue"), "-", colored(row[3], "cyan"), colored(row[1], "cyan"))
+        else:
+            print(colored(i + 1, "green") + ".", colored(row[0], "blue"), "-", colored(row[1], "cyan"))
 
         i += 1
 
     input("Press ENTER to go back...")
-
-
-def settings_change():
-    settings_file = settings("load")
-
-    print(colored("Settings", "magenta"))
-    print("1. Change default language")
-    print("2. Toggle formality on/off (showing if the word is formal or not)")
-
-
-    while True:
-        usrinput = input(colored(" ==> ", "cyan"))
-
-        if usrinput == "1" or usrinput == "":
-            print("Enter your preferred language")
-            usrinput = input(colored("  ==> ", "cyan")).lower()
-
-            if usrinput == "turkish" or usrinput == "tr":
-                settings_file["def_lang"] = "tr"
-                print("Successfully changed default language to Turkish (tr).")
-                settings("save", settings_file)
-
-                time.sleep(1.5)
-
-                break
-            elif usrinput == "german" or usrinput == "de":
-                settings_file["def_lang"] = "de"
-                print("Successfully changed default language to German (de).")
-                settings("save", settings_file)
-
-                time.sleep(1.5)
-
-                break
-            elif usrinput == "exit":
-                pass
-            else:
-                print(colored("error", "red") + f": {usrinput}: ivalid language number/name/code.")
-        elif usrinput == "2":
-            t = 0
-
-            if settings_file["formality"] == False:
-                print("This feature is turned off. Turn it on? [Y/n] ", end="")
-                t = 1
-            else:
-                print("This feature is turned on. Turn it off? [Y/n] ", end="")
-
-            usrinput = input()
-
-            if usrinput == "" or usrinput == "y" or usrinput == "yes":
-                if t == 0:
-                    settings_file["formality"] = False
-                else:
-                    settings_file["formality"] = True
-
-                print("Successfully changed to " + colored(settings_file["formality"], "cyan") + ".")
-            else:
-                pass
-        elif usrinput == "exit":
-            break
-        else:
-            print(colored("error", "red") + f": {usrinput}: ivalid choice.")
 
 
 def add_words():
@@ -546,8 +579,88 @@ def add_words():
         else:
             print(enword, lword, formality)
 
-
-
-
     if q == 1:
         return
+
+def settings_change():
+    settings_file = settings("load")
+
+    print(colored("Settings", "magenta"))
+    print("1. Change default language")
+    print("2. Toggle formality on/off (showing if the word is formal or not)")
+    print("3. Toggle articles on/off")
+
+
+    while True:
+        usrinput = input(colored(" ==> ", "cyan"))
+
+        if usrinput == "1" or usrinput == "":
+            print("Enter your preferred language")
+            usrinput = input(colored("  ==> ", "cyan")).lower()
+
+            if usrinput == "turkish" or usrinput == "tr":
+                settings_file["def_lang"] = "tr"
+                print("Successfully changed default language to Turkish (tr).")
+                settings("save", settings_file)
+
+                time.sleep(1.5)
+
+                break
+            elif usrinput == "german" or usrinput == "de":
+                settings_file["def_lang"] = "de"
+                print("Successfully changed default language to German (de).")
+                settings("save", settings_file)
+
+                time.sleep(1.5)
+
+                break
+            elif usrinput == "exit":
+                pass
+            else:
+                print(colored("error", "red") + f": {usrinput}: ivalid language number/name/code.")
+        elif usrinput == "2":
+            t = 0
+
+            if settings_file["formality"] == False:
+                print("This feature is turned off. Turn it on? [Y/n] ", end="")
+                t = 1
+            else:
+                print("This feature is turned on. Turn it off? [Y/n] ", end="")
+
+            usrinput = input()
+
+            if usrinput == "" or usrinput == "y" or usrinput == "yes":
+                if t == 0:
+                    settings_file["formality"] = False
+                else:
+                    settings_file["formality"] = True
+
+                print("Successfully changed to " + colored(settings_file["formality"], "cyan") + ".")
+            else:
+                pass
+        elif usrinput == "3":
+            t = 0
+
+            if settings_file["grammatical_articles"] == False:
+                print("This feature is turned off. Turn it on? [Y/n] ", end="")
+                t = 1
+            else:
+                print("This feature is turned on. Turn it off? [Y/n] ", end="")
+
+            usrinput = input()
+
+            if usrinput == "" or usrinput == "y" or usrinput == "yes":
+                if t == 0:
+                    settings_file["grammatical_articles"] = False
+                else:
+                    settings_file["grammatical_articles"] = True
+            else:
+                pass
+            
+            settings("save", settings_file)
+            print("Successfully changed to " + colored(settings_file["grammatical_articles"], "cyan") + ".")
+        elif usrinput == "exit":
+            break
+        else:
+            print(colored("error", "red") + f": {usrinput}: ivalid choice.")
+
