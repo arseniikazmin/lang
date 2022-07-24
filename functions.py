@@ -118,103 +118,7 @@ def learn_words():
         if q == 1:
             return
 
-    if lang == "tr":
-        print("Choose a category: ")
-        print("1. All words")
-        print("2. Colours")
-        print("3. Days")
-        print("4. Food")
-        print("5. Months")
-        print("6. Numbers")
-        print("7. Numbers (extended)")
-
-        while True:
-            usrinput = input(colored(" ==> ", "cyan")).lower()
-
-            if usrinput == "1":
-                name = "all"
-                break
-            elif usrinput == "2":
-                name = "colours"
-                break
-            elif usrinput == "3":
-                name = "days"
-                break
-            elif usrinput == "4":
-                name = "food"
-                break
-            elif usrinput == "5":
-                name = "months"
-                break
-            elif usrinput == "6":
-                name = "numbers"
-                break
-            elif usrinput == "7":
-                name = "numbers_full"
-                break
-            elif usrinput == "clear":
-                clear()
-                print("Select language:")
-                print("1. Turkish")
-                print("2. German")
-            elif usrinput == "exit":
-                q = 1
-
-                break
-            else:
-                print(colored("error", "red") + f": {usrinput}: invalid option.")
-    elif lang == "de":
-        print("Choose a category: ")
-        print("1. All words")
-        print("2. Colours")
-        print("3. Days")
-        print("4. Food")
-        print("5. Months")
-        print("6. Numbers")
-        print("7. Numbers (extended)")
-
-        while True:
-            usrinput = input(colored(" ==> ", "cyan")).lower()
-
-            if usrinput == "1":
-                name = "all"
-                break
-            elif usrinput == "2":
-                name = "colours"
-                break
-            elif usrinput == "3":
-                name = "days"
-                break
-            elif usrinput == "4":
-                name = "food"
-                break
-            elif usrinput == "5":
-                name = "months"
-                break
-            elif usrinput == "6":
-                name = "numbers"
-                break
-            elif usrinput == "7":
-                name = "numbers_full"
-                break
-            elif usrinput == "clear":
-                clear()
-                print("Select language:")
-                print("1. Turkish")
-                print("2. German")
-            elif usrinput == "exit":
-                q = 1
-
-                break
-            else:
-                print(colored("error", "red") + f": {usrinput}: invalid option.")
-            
-        if q == 1:
-            return
-        
-        words = load_words(lang, name)
-    
-    elif lang == "es":
+    if lang in ["tr", "de", "es"]:
         print("Choose a category: ")
         print("1. All words")
         print("2. Colours")
@@ -440,105 +344,7 @@ def view_words():
             return
 
 
-    if lang == "tr":
-        print("Choose a category: ")
-        print("1. All words")
-        print("2. Colours")
-        print("3. Days")
-        print("4. Food")
-        print("5. Months")
-        print("6. Numbers")
-        print("7. Numbers (extended)")
-
-        while True:
-            usrinput = input(colored(" ==> ", "cyan")).lower()
-
-            if usrinput == "1":
-                name = "all"
-                break
-            elif usrinput == "2":
-                name = "colours"
-                break
-            elif usrinput == "3":
-                name = "days"
-                break
-            elif usrinput == "4":
-                name = "food"
-                break
-            elif usrinput == "5":
-                name = "months"
-                break
-            elif usrinput == "6":
-                name = "numbers"
-                break
-            elif usrinput == "7":
-                name = "numbers_full"
-                break
-            elif usrinput == "clear":
-                clear()
-                print("Select language:")
-                print("1. Turkish")
-            elif usrinput == "exit":
-                q = 1
-                break
-            else:
-                print(colored("error", "red") + f": {usrinput}: invalid option.")
-            
-        
-            words = load_words(lang, name)
-
-        if q == 1:
-            return
-    elif lang == "de":
-        print("Choose a category: ")
-        print("1. All words")
-        print("2. Colours")
-        print("3. Days")
-        print("4. Food")
-        print("5. Months")
-        print("6. Numbers")
-        print("7. Numbers (extended)")
-
-        while True:
-            usrinput = input(colored(" ==> ", "cyan")).lower()
-
-            if usrinput == "1":
-                name = "all"
-                break
-            elif usrinput == "2":
-                name = "colours"
-                break
-            elif usrinput == "3":
-                name = "days"
-                break
-            elif usrinput == "4":
-                name = "food"
-                break
-            elif usrinput == "5":
-                name = "months"
-                break
-            elif usrinput == "6":
-                name = "numbers"
-                break
-            elif usrinput == "7":
-                name = "numbers_full"
-                break
-            elif usrinput == "clear":
-                clear()
-                print("Select language:")
-                print("1. Turkish")
-                print("2. German")
-            elif usrinput == "exit":
-                q = 1
-
-                break
-            else:
-                print(colored("error", "red") + f": {usrinput}: invalid option.")
-            
-        if q == 1:
-            return
-    
-    elif lang == "es":
+    if lang in ["tr", "de", "es"]:
         print("Choose a category: ")
         print("1. All words")
         print("2. Colours")
@@ -580,11 +386,13 @@ def view_words():
                 print("3. Spanish")
             elif usrinput == "exit":
                 q = 1
-
                 break
             else:
                 print(colored("error", "red") + f": {usrinput}: invalid option.")
             
+        
+            words = load_words(lang, name)
+
         if q == 1:
             return
 
@@ -665,7 +473,7 @@ def add_words():
     enword = ""
     formality = 0
 
-    if lang == "tr":
+    if lang in ["tr", "de", "es"]:
         print(colored("\x1B[3mi\x1B[0m", "green") + f": Enter an English name and then the {lang_name} counterpart afterwards.")
         print(colored("\x1B[3mi\x1B[0m", "green") + ": If you spelled a word incorrectly, you can type \"!back\"; it will cancel the process.")
 
@@ -695,43 +503,11 @@ def add_words():
             elif usrinput == "1":
                 formality == 1
                 break
-            else:
-                print(colored("error", "red") + f": {usrinput}: invalid input. Only 0 or 1 is acceptable.")
-        
-        if enword and lword != "":
-            print("asdasd")    
-    elif lang == "de":
-        print(colored("\x1B[3mi\x1B[0m", "green") + f": Enter an English name and then the {lang_name} counterpart afterwards.")
-        print(colored("\x1B[3mi\x1B[0m", "green") + ": If you spelled a word incorrectly, you can type \"!back\"; it will cancel the process.")
-
-        while True:
-            lword = ""
-            enword = ""
-            formality = 0
-
-            usrinput = input(colored(" en ==> "))
-            if usrinput.lower() == "!back":
-                break
-            else:
-                enword = usrinput
-            usrinput = input(colored(f" {lang} ==> "))
-            if usrinput.lower() == "!back":
-                break
-            else:
-                lword = usrinput
-                break
-
-            usrinput = input(colored(f" formality ==> "))
-            if usrinput.lower() == "!back":
-                break
-            elif usrinput == "0":
-                formality = 0
-                break
-            elif usrinput == "1":
+            elif usrinput == "2":
                 formality == 1
                 break
             else:
-                print(colored("error", "red") + f": {usrinput}: invalid input. Only 0 or 1 is acceptable.")
+                print(colored("error", "red") + f": {usrinput}: invalid input. Only 0, 1 and 2 are acceptable.")
         
         if enword and lword != "":
             print("asdasd")
