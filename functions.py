@@ -30,7 +30,6 @@ def settings(tp="load", set_dict=[]):
 
 
 def load_words(lang=lang, name="all"):
-    # if lang == "tr":
     with open(os.getcwd() + f"/languages/{lang}/{name}.csv", "r") as f:
         csvReader = csv.reader(f)
 
@@ -41,28 +40,6 @@ def load_words(lang=lang, name="all"):
             rows.append(row)
         
         return rows, fields
-    # elif lang == "de":
-    #     with open(os.getcwd() + f"/languages/de/{name}.csv", "r") as f:
-    #         csvReader = csv.reader(f)
-
-    #         fields = next(csvReader)
-    #         rows = []
-
-    #         for row in csvReader:
-    #             rows.append(row)
-            
-    #         return rows, fields
-    # elif lang == "es":
-    #     with open(os.getcwd() + f"/languages/es/{name}.csv", "r") as f:
-    #         csvReader = csv.reader(f)
-
-    #         fields = next(csvReader)
-    #         rows = []
-
-    #         for row in csvReader:
-    #             rows.append(row)
-            
-    #         return rows, fields
 
 
 def learn_words():
