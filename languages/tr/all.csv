@@ -1,65 +1,65 @@
-﻿EN,TR,Formal
-Bread,Ekmek,2
-Water,Su,2
-Apple,Elma,2
-Days,Günler,2
-Monday,Pazartesi,2
-Tuesday,Salı,2
-Wednesday,Çarşamba,2
-Thursday,Perşembe,2
-Friday,Cuma,2
-Saturday,Cumartesi,2
-Sunday,Pazar,2
-Months,Aylar,2
-January,Ocak,2
-February,Şubat,2
-March,Mart,2
-April,Nisan,2
-May,Mayıs,2
-June,Haziran,2
-July,Temmuz,2
-August,Ağustos,2
-September,Eylül,2
-October,Ekim,2
-November,Kasım,2
-December,Aralık,2
-Colours,Renkler,2
-Black,Siyah,2
-Blue,Mavi,2
-Brown,Kahverengi,2
-Gray,Gri,2
-Green,Yeşil,2
-Orange, Portakalrengi,2
-Purple,Mor,2
-Red,kırmızı,2
-White,Beyaz,2
-Yellow,Sarı,2
-Numbers,Numarlar,2
-One,Bir,2
-Two,Iki,2
-Three,Üç,2
-Four,Dört,2
-Five,Beş,2
-Six,Altı,2
-Seven,Yedi,2
-Eight,Sekiz,2
-Nine,Dokuz,2
-Ten,On,2
-Eleven, Onbir,2
-Twelve, Oniki,2
-Thirteen, Onüç,2
-Fourteen, Ondört,2
-Fifteen,Onbeş,2
-Sixteen, Onaltı,2
-Seventeen, Onyedi,2
-Eighteen,Onsekiz,2
-Nineteen, Ondokuz,2
-Twenty,Yirmi,2
-Thirty,Otuz,2
-Forty,Kırk,2
-Fifty,Elli,2
-Sixty,Atmış,2
-Seventy,Yetmiş,2
-Eighty,Seksen,2
-Ninety,Doksan,2
-Hundred,Yüz,2
+﻿EN,LA,Formal,Article
+Bread,Ekmek,2,none
+Water,Su,2,none
+Apple,Elma,2,none
+Days,Günler,2,none
+Monday,Pazartesi,2,none
+Tuesday,Salı,2,none
+Wednesday,Çarşamba,2,none
+Thursday,Perşembe,2,none
+Friday,Cuma,2,none
+Saturday,Cumartesi,2,none
+Sunday,Pazar,2,none
+Months,Aylar,2,none
+January,Ocak,2,none
+February,Şubat,2,none
+March,Mart,2,none
+April,Nisan,2,none
+May,Mayıs,2,none
+June,Haziran,2,none
+July,Temmuz,2,none
+August,Ağustos,2,none
+September,Eylül,2,none
+October,Ekim,2,none
+November,Kasım,2,none
+December,Aralık,2,none
+Colours,Renkler,2,none
+Black,Siyah,2,none
+Blue,Mavi,2,none
+Brown,Kahverengi,2,none
+Gray,Gri,2,none
+Green,Yeşil,2,none
+Orange, Portakalrengi,2,none
+Purple,Mor,2,none
+Red,kırmızı,2,none
+White,Beyaz,2,none
+Yellow,Sarı,2,none
+Numbers,Numarlar,2,none
+One,Bir,2,none
+Two,Iki,2,none
+Three,Üç,2,none
+Four,Dört,2,none
+Five,Beş,2,none
+Six,Altı,2,none
+Seven,Yedi,2,none
+Eight,Sekiz,2,none
+Nine,Dokuz,2,none
+Ten,On,2,none
+Eleven, Onbir,2,none
+Twelve, Oniki,2,none
+Thirteen, Onüç,2,none
+Fourteen, Ondört,2,none
+Fifteen,Onbeş,2,none
+Sixteen, Onaltı,2,none
+Seventeen, Onyedi,2,none
+Eighteen,Onsekiz,2,none
+Nineteen, Ondokuz,2,none
+Twenty,Yirmi,2,none
+Thirty,Otuz,2,none
+Forty,Kırk,2,none
+Fifty,Elli,2,none
+Sixty,Atmış,2,none
+Seventy,Yetmiş,2,none
+Eighty,Seksen,2,none
+Ninety,Doksan,2,none
+Hundred,Yüz,2,none

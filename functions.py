@@ -5,8 +5,13 @@ import os
 import csv
 from termcolor import colored
 
-lang = "tr"
-lang_name = "Turkish"
+
+# const
+articles_list= "das", "die", "der", "el", "la", "lo", "los", "las"
+
+lang = "es"
+lang_name = "Spanish"
+
 
 CLEAR_FUNCTION = "clear"
 
@@ -25,28 +30,39 @@ def settings(tp="load", set_dict=[]):
 
 
 def load_words(lang=lang, name="all"):
-    if lang == "tr":
-        with open(os.getcwd() + f"/languages/tr/{name}.csv", "r") as f:
-            csvReader = csv.reader(f)
+    # if lang == "tr":
+    with open(os.getcwd() + f"/languages/{lang}/{name}.csv", "r") as f:
+        csvReader = csv.reader(f)
 
-            fields = next(csvReader)
-            rows = []
+        fields = next(csvReader)
+        rows = []
 
-            for row in csvReader:
-                rows.append(row)
+        for row in csvReader:
+            rows.append(row)
+        
+        return rows, fields
+    # elif lang == "de":
+    #     with open(os.getcwd() + f"/languages/de/{name}.csv", "r") as f:
+    #         csvReader = csv.reader(f)
+
+    #         fields = next(csvReader)
+    #         rows = []
+
+    #         for row in csvReader:
+    #             rows.append(row)
             
-            return rows, fields
-    elif lang == "de":
-        with open(os.getcwd() + f"/languages/de/{name}.csv", "r") as f:
-            csvReader = csv.reader(f)
+    #         return rows, fields
+    # elif lang == "es":
+    #     with open(os.getcwd() + f"/languages/es/{name}.csv", "r") as f:
+    #         csvReader = csv.reader(f)
 
-            fields = next(csvReader)
-            rows = []
+    #         fields = next(csvReader)
+    #         rows = []
 
-            for row in csvReader:
-                rows.append(row)
+    #         for row in csvReader:
+    #             rows.append(row)
             
-            return rows, fields
+    #         return rows, fields
 
 
 def learn_words():
@@ -62,10 +78,14 @@ def learn_words():
     elif settings_file["def_lang"] == "de":
         lang = "de"
         lang_name = "German"
+    elif settings_file["def_lang"] == "es":
+        lang = "es"
+        lang_name = "Spanish"
     else:
         print("Select language:")
         print("1. Turkish")
         print("2. German")
+        print("3. Spanish")
 
         while True:
             usrinput = input(colored(" ==> ", "cyan")).lower()
@@ -76,13 +96,18 @@ def learn_words():
                 break
             elif usrinput == "2" or usrinput == "german":
                 lang = "de"
-                lang_name = "german"
+                lang_name = "German"
+                break
+            elif usrinput == "3" or usrinput == "spanish":
+                lang = "es"
+                lang_name = "Spanish"
                 break
             elif usrinput == "clear":
                 clear()
                 print("Select language:")
                 print("1. Turkish")
                 print("2. German")
+                print("3. Spanish")
             elif usrinput == "exit":
                 q = 1
 
@@ -188,6 +213,58 @@ def learn_words():
             return
         
         words = load_words(lang, name)
+    
+    elif lang == "es":
+        print("Choose a category: ")
+        print("1. All words")
+        print("2. Colours")
+        print("3. Days")
+        print("4. Food")
+        print("5. Months")
+        print("6. Numbers")
+        print("7. Numbers (extended)")
+
+        while True:
+            usrinput = input(colored(" ==> ", "cyan")).lower()
+
+            if usrinput == "1":
+                name = "all"
+                break
+            elif usrinput == "2":
+                name = "colours"
+                break
+            elif usrinput == "3":
+                name = "days"
+                break
+            elif usrinput == "4":
+                name = "food"
+                break
+            elif usrinput == "5":
+                name = "months"
+                break
+            elif usrinput == "6":
+                name = "numbers"
+                break
+            elif usrinput == "7":
+                name = "numbers_full"
+                break
+            elif usrinput == "clear":
+                clear()
+                print("Select language:")
+                print("1. Turkish")
+                print("2. German")
+                print("3. Spanish")
+            elif usrinput == "exit":
+                q = 1
+
+                break
+            else:
+                print(colored("error", "red") + f": {usrinput}: invalid option.")
+            
+        if q == 1:
+            return
+        
+        words = load_words(lang, name)
 
     if q == 1:
         return
@@ -204,22 +281,19 @@ def learn_words():
         try_number = 0
         formality = ""
 
-        if article.lower() not in ["das", "die", "der"]:
-            articles = False
-        else:
-            pass
-
         if formal == "0":
             formality = "no"
         elif formal == "1":
             formality = "yes"
+        elif formal == "1":
+            formality = "no"
 
         while True:
             if formal != "2":
                 if articles == True:
                     print(f"Enter the {lang_name} word for " + colored(word, "magenta") + " with the proper grammatical article. Formal?: " + colored(formality, "cyan"))
                 else:
-                    print(f"Enter the {lang_name} word for " + colored(word, "magenta") + " with the proper grammatical article. Formal?: " + colored(formality, "cyan"))
+                    print(f"Enter the {lang_name} word for " + colored(word, "magenta") + ". Formal?: " + colored(formality, "cyan"))
             else:
                 if articles == True:
                     print(f"Enter the {lang_name} word for " + colored(word, "magenta") + " with the proper grammatical article.")
@@ -230,10 +304,34 @@ def learn_words():
 
             usrinput = input().lower()
 
-            if articles == True:
-                if usrinput == article + " " + lword.lower():
-                    print(colored("Correct", "green") + "!")
-                    break
+            if article not in articles_list:
+                articles = False
+
+            if True:
+                if articles == True and usrinput != "hint" and usrinput != "exit":
+                    if usrinput == article + " " + lword.lower():
+                        print(colored("Correct", "green") + "!")
+                        break
+                    else:
+                        try_number += 1
+
+                        if try_number <= 2:
+                            print(colored("Incorrect", "red") + ". Try again.")
+                        else:
+                            print(colored("Incorrect", "red") + ". The right answer was: " + colored(article, "cyan"), colored(lword, "cyan"))
+                            break
+                elif articles != False and usrinput != "hint" and usrinput != "exit":
+                    if usrinput == lword.lower():
+                        print(colored("Correct", "green") + "!")
+                        break
+                    else:
+                        try_number += 1
+
+                        if try_number <= 2:
+                            print(colored("Incorrect", "red") + ". Try again.")
+                        else:
+                            print(colored("Incorrect", "red") + ". The right answer was: " + colored(article, "cyan"), colored(lword, "cyan"))
+                            break
                 elif usrinput == "hint":
                     hints = 3
 
@@ -252,13 +350,7 @@ def learn_words():
                     q = 1
                     break
                 else:
-                    try_number += 1
-
-                    if try_number <= 2:
-                        print(colored("Incorrect", "red") + ". Try again.")
-                    else:
-                        print(colored("Incorrect", "red") + ". The right answer was: " + colored(article, "cyan"), colored(lword, "cyan"))
-                        break
+                    print("what")
             else:
                 if usrinput == lword.lower():
                     print(colored("Correct", "green") + "!")
@@ -308,10 +400,14 @@ def view_words():
     elif settings_file["def_lang"] == "de":
         lang = "de"
         lang_name = "German"
+    elif settings_file["def_lang"] == "es":
+        lang = "es"
+        lang_name = "Spanish"
     else:
         print("Select language:")
         print("1. Turkish")
         print("2. German")
+        print("3. Spanish")
 
         while True:
             usrinput = input(colored(" ==> ", "cyan")).lower()
@@ -322,13 +418,18 @@ def view_words():
                 break
             elif usrinput == "2" or usrinput == "german":
                 lang = "de"
-                lang_name = "german"
+                lang_name = "German"
+                break
+            elif usrinput == "2" or usrinput == "spanish":
+                lang = "es"
+                lang_name = "Spanish"
                 break
             elif usrinput == "clear":
                 clear()
                 print("Select language:")
                 print("1. Turkish")
                 print("2. German")
+                print("3. Spanish")
             elif usrinput == "exit":
                 q = 1
                 break
@@ -436,6 +537,56 @@ def view_words():
             
         if q == 1:
             return
+    
+    elif lang == "es":
+        print("Choose a category: ")
+        print("1. All words")
+        print("2. Colours")
+        print("3. Days")
+        print("4. Food")
+        print("5. Months")
+        print("6. Numbers")
+        print("7. Numbers (extended)")
+
+        while True:
+            usrinput = input(colored(" ==> ", "cyan")).lower()
+
+            if usrinput == "1":
+                name = "all"
+                break
+            elif usrinput == "2":
+                name = "colours"
+                break
+            elif usrinput == "3":
+                name = "days"
+                break
+            elif usrinput == "4":
+                name = "food"
+                break
+            elif usrinput == "5":
+                name = "months"
+                break
+            elif usrinput == "6":
+                name = "numbers"
+                break
+            elif usrinput == "7":
+                name = "numbers_full"
+                break
+            elif usrinput == "clear":
+                clear()
+                print("Select language:")
+                print("1. Turkish")
+                print("2. German")
+                print("3. Spanish")
+            elif usrinput == "exit":
+                q = 1
+
+                break
+            else:
+                print(colored("error", "red") + f": {usrinput}: invalid option.")
+            
+        if q == 1:
+            return
 
     rows, fields = load_words(lang, name)
     articles = settings_file["grammatical_articles"]
@@ -443,13 +594,12 @@ def view_words():
     i = 0
     for row in rows:
         article = row[3]
-        if article not in ["das", "die", "der"]:
-            articles = False
-        else:
-            pass
 
         if articles == True:
-            print(colored(i + 1, "green") + ".", colored(row[0], "blue"), "-", colored(row[3], "cyan"), colored(row[1], "cyan"))
+            if article != "none":
+                print(colored(i + 1, "green") + ".", colored(row[0], "blue"), "-", colored(row[3], "cyan"), colored(row[1], "cyan"))
+            else:
+                print(colored(i + 1, "green") + ".", colored(row[0], "blue"), "-", colored(row[1], "cyan"))
         else:
             print(colored(i + 1, "green") + ".", colored(row[0], "blue"), "-", colored(row[1], "cyan"))
 
@@ -467,13 +617,17 @@ def add_words():
     if settings_file["def_lang"] == "tr":
         lang = "tr"
         lang_name = "Turkish"
-    elif settings_file["def_lang"] == "tr":
+    elif settings_file["def_lang"] == "de":
         lang = "de"
         lang_name = "German"
+    elif settings_file["def_lang"] == "es":
+        lang = "es"
+        lang_name = "Spanish"
     
     print("Select language:")
     print("1. Turkish")
     print("2. German")
+    print("3. Spanish")
 
     while True:
         usrinput = input(colored(" ==> ", "cyan")).lower()
@@ -486,11 +640,16 @@ def add_words():
             lang = "de"
             lang_name = "german"
             break
+        elif usrinput == "3" or usrinput == "spanish":
+            lang = "es"
+            lang_name = "spanish"
+            break
         elif usrinput == "clear":
             clear()
             print("Select language:")
             print("1. Turkish")
             print("2. German")
+            print("3. Spanish")
         elif usrinput == "exit":
             q = 1
 
@@ -507,8 +666,8 @@ def add_words():
     formality = 0
 
     if lang == "tr":
-        print(f"You can add words here without editing the .json files. Just enter an English name, then the {lang_name} counterpart afterwards,")
-        print("then the formality: 0 (informal) or 1 (formal). If you spelled a word incorrectly, you can type \"!back\"; it will cancel the process.")
+        print(colored("\x1B[3mi\x1B[0m", "green") + f": Enter an English name and then the {lang_name} counterpart afterwards.")
+        print(colored("\x1B[3mi\x1B[0m", "green") + ": If you spelled a word incorrectly, you can type \"!back\"; it will cancel the process.")
 
         while True:
             lword = ""
@@ -609,6 +768,14 @@ def settings_change():
             elif usrinput == "german" or usrinput == "de":
                 settings_file["def_lang"] = "de"
                 print("Successfully changed default language to German (de).")
+                settings("save", settings_file)
+
+                time.sleep(1.5)
+
+                break
+            elif usrinput == "spanish" or usrinput == "es":
+                settings_file["def_lang"] = "es"
+                print("Successfully changed default language to Spanish (es).")
                 settings("save", settings_file)
 
                 time.sleep(1.5)
