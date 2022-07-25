@@ -599,4 +599,3 @@ def settings_change():
             break
         else:
             print(colored("error", "red") + f": {usrinput}: ivalid choice.")
-
