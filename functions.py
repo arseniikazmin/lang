@@ -517,6 +517,7 @@ def settings_change():
     print("1. Change default language")
     print("2. Toggle formality on/off (showing if the word is formal or not)")
     print("3. Toggle articles on/off")
+    print("4. Reset settings")
 
 
     while True:
@@ -524,36 +525,56 @@ def settings_change():
 
         if usrinput == "1" or usrinput == "":
             print("Enter your preferred language")
-            usrinput = input(colored("  ==> ", "cyan")).lower()
+            usrinput = input("  [ES/de/tr] " + colored("==> ", "cyan")).lower()
 
-            if usrinput == "turkish" or usrinput == "tr":
-                settings_file["def_lang"] = "tr"
-                print("Successfully changed default language to Turkish (tr).")
-                settings("save", settings_file)
+            if usrinput == "tr" or usrinput == "turkish":
+                if usrinput == settings_file["def_lang"]:
+                    print("Your language is already set to Turkish (tr).")
 
-                time.sleep(1.5)
+                    input("Press ENTER to go back...")
+                else:
+                    settings_file["def_lang"] = "tr"
+                    print("Successfully changed default language to Turkish (tr).")
+                    settings("save", settings_file)
 
-                break
-            elif usrinput == "german" or usrinput == "de":
-                settings_file["def_lang"] = "de"
-                print("Successfully changed default language to German (de).")
-                settings("save", settings_file)
-
-                time.sleep(1.5)
+                    time.sleep(1.5)
 
                 break
-            elif usrinput == "spanish" or usrinput == "es":
-                settings_file["def_lang"] = "es"
-                print("Successfully changed default language to Spanish (es).")
-                settings("save", settings_file)
 
-                time.sleep(1.5)
+            elif usrinput == "de" or usrinput == "german":
+                if usrinput == settings_file["def_lang"]:
+                    print("Your language is already set to German (de).")
+
+                    input("Press ENTER to go back...")
+                else:
+                    settings_file["def_lang"] = "de"
+                    print("Successfully changed default language to German (de).")
+                    settings("save", settings_file)
+
+                    time.sleep(1.5)
 
                 break
+
+            elif usrinput == "es" or usrinput == "spanish":
+                if usrinput == settings_file["def_lang"]:
+                    print("Your language is already set to Spanish (es).")
+
+                    input("Press ENTER to go back...")
+                else:
+                    settings_file["def_lang"] = "es"
+                    print("Successfully changed default language to Spanish (es).")
+                    settings("save", settings_file)
+
+                    time.sleep(1.5)
+
+                break
+
             elif usrinput == "exit":
                 pass
+
             else:
                 print(colored("error", "red") + f": {usrinput}: ivalid language number/name/code.")
+
         elif usrinput == "2":
             t = 0
 
@@ -574,6 +595,7 @@ def settings_change():
                 print("Successfully changed to " + colored(settings_file["formality"], "cyan") + ".")
             else:
                 pass
+
         elif usrinput == "3":
             t = 0
 
@@ -595,7 +617,20 @@ def settings_change():
             
             settings("save", settings_file)
             print("Successfully changed to " + colored(settings_file["grammatical_articles"], "cyan") + ".")
+
+        elif usrinput == "4":
+            print("Are you sure you want to reset all progress? This " + colored("cannot", "red") + " be undone.")
+            confirm = input(" [y/N] " + colored("==> ", "magenta")).lower()
+
+            if confirm == "y" or confirm == "yes":
+                settings_file["def_lang"] = "es"
+                settings_file["formality"] = False
+                settings_file["grammatical_articles"] = True
+
+                settings("save", settings_file)
+
         elif usrinput == "exit":
             break
+
         else:
             print(colored("error", "red") + f": {usrinput}: ivalid choice.")
