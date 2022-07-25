@@ -71,24 +71,28 @@ def learn_words():
                 lang = "tr"
                 lang_name = "Turkish"
                 break
+
             elif usrinput == "2" or usrinput == "german":
                 lang = "de"
                 lang_name = "German"
                 break
+
             elif usrinput == "3" or usrinput == "spanish":
                 lang = "es"
                 lang_name = "Spanish"
                 break
+
             elif usrinput == "clear":
                 clear()
                 print("Select language:")
                 print("1. Turkish")
                 print("2. German")
                 print("3. Spanish")
+
             elif usrinput == "exit":
                 q = 1
-
                 break
+
             else:
                 print(colored("error", "red") + f": {usrinput}: invalid option.")
 
@@ -111,37 +115,49 @@ def learn_words():
             if usrinput == "1":
                 name = "all"
                 break
+
             elif usrinput == "2":
                 name = "colours"
                 break
+
             elif usrinput == "3":
                 name = "days"
                 break
+
             elif usrinput == "4":
                 name = "food"
                 break
+
             elif usrinput == "5":
                 name = "months"
                 break
+
             elif usrinput == "6":
                 name = "numbers"
                 break
+
             elif usrinput == "7":
                 name = "numbers_full"
                 break
+
             elif usrinput == "clear":
                 clear()
-                print("Select language:")
-                print("1. Turkish")
-                print("2. German")
-                print("3. Spanish")
+                print("Choose a category: ")
+                print("1. All words")
+                print("2. Colours")
+                print("3. Days")
+                print("4. Food")
+                print("5. Months")
+                print("6. Numbers")
+                print("7. Numbers (extended)")
+
             elif usrinput == "exit":
                 q = 1
-
                 break
+
             else:
                 print(colored("error", "red") + f": {usrinput}: invalid option.")
-            
+
         if q == 1:
             return
         
