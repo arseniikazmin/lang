@@ -10,14 +10,14 @@ except:
 	subprocess.run("pip3 install termcolor", shell=True)
 	print("Dependencies successfully installed.")
 	time.sleep(1)
-	functions.clear()
 	from termcolor import colored
 
 import functions
+functions.clear()
 
 
 data = []
-version = "0.0.0"
+version = ""
 
 with open("data.json", "r") as f:
     data = json.load(f)
@@ -57,6 +57,5 @@ def main():
 
         else:
             print(colored("error", "red") + f": {usrinput}: invalid option.")
-
 
 main()
