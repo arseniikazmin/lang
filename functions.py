@@ -203,26 +203,83 @@ def learn_words():
                         print(colored("Correct", "green") + "!")
                         break
                     else:
-                        try_number += 1 # Increment try_number by 1
+                        lword = list(lword)
 
-                        if try_number <= 2: # If try_number hasn't reached 3
-                            print(colored("Incorrect", "red") + ". Try again.")
-                        else: # Else, tell the user the word
-                            print(colored("Incorrect", "red") + ". The right answer was: " + colored(article, "cyan"), colored(lword, "cyan"))
+                        for i in range(0, len(lword)):
+                            if lword[i].lower() in ["í", "ó", "é", "ä", "ö", "ü", "ß", "ı", "ç", "ş"]:
+                                if lword[i].lower() == "í":
+                                    lword[i] = "i"
+                                elif lword[i].lower() == "ó":
+                                    lword[i] = "o"
+                                elif lword[i].lower() == "é":
+                                    lword[i] = "e"
+                                elif lword[i].lower() == "ä":
+                                    lword[i] = "a"
+                                elif lword[i].lower() == "ü":
+                                    lword[i] = "u"
+                                elif lword[i].lower() == "ß":
+                                    lword[i] = "ss"
+                                elif lword[i].lower() == "ı":
+                                    lword[i] = "i"
+                                elif lword[i].lower() == "ç":
+                                    lword[i] = "c"
+                                elif lword[i].lower() == "ş":
+                                    lword[i] = "s"
+                        lword = ''.join(lword)                        
+
+                        if usrinput == article + " " + lword.lower():
+                            print(colored("Correct", "green") + "!")
                             break
+                        else:
+                            try_number += 1 # Increment try_number by 1
+
+                            if try_number <= 2: # If try_number hasn't reached 3
+                                print(colored("Incorrect", "red") + ". Try again.")
+                            else: # Else, tell the user the word
+                                print(colored("Incorrect", "red") + ". The right answer was: " + colored(article, "cyan"), colored(lword, "cyan"))
+                                break
                 # If articles are disabled AND the user hasn't tried to use a hint/exit
-                elif articles != False and usrinput != "hint" and usrinput != "exit":
+                elif articles == False and usrinput != "hint" and usrinput != "exit":
                     if usrinput == lword.lower():
                         print(colored("Correct", "green") + "!")
                         break
                     else:
-                        try_number += 1 # Increment try_number by 1
+                        lword = list(lword)
 
-                        if try_number <= 2: # If try_number hasn't reached 3
-                            print(colored("Incorrect", "red") + ". Try again.")
-                        else: # Else, tell the user the word
-                            print(colored("Incorrect", "red") + ". The right answer was: " + colored(article, "cyan"), colored(lword, "cyan"))
+                        for i in range(0, len(lword)):
+                            if lword[i].lower() in ["í", "ó", "é", "ä", "ö", "ü", "ß", "ı", "ç", "ş",]:
+                                if lword[i].lower() == "í":
+                                    lword[i] = "i"
+                                elif lword[i].lower() == "ó":
+                                    lword[i] = "o"
+                                elif lword[i].lower() == "é":
+                                    lword[i] = "e"
+                                elif lword[i].lower() == "ä":
+                                    lword[i] = "a"
+                                elif lword[i].lower() == "ü":
+                                    lword[i] = "u"
+                                elif lword[i].lower() == "ß":
+                                    lword[i] = "ss"
+                                elif lword[i].lower() == "ı": # this is "ı"
+                                    lword[i] = "i"
+                                elif lword[i].lower() == "ç":
+                                    lword[i] = "c"
+                                elif lword[i].lower() == "ş":
+                                    lword[i] = "s"
+                        lword = ''.join(lword)                        
+
+                        if usrinput == lword.lower():
+                            print(colored("Correct", "green") + "!" + colored(" However, next time pay attention to the accents.", "yellow"))
+                            print(colored("They are essential in language learning.", "yellow"))
                             break
+                        else:
+                            try_number += 1 # Increment try_number by 1
+
+                            if try_number <= 2: # If try_number hasn't reached 3
+                                print(colored("Incorrect", "red") + ". Try again.")
+                            else: # Else, tell the user the word
+                                print(colored("Incorrect", "red") + ". The right answer was: " + colored(lword, "cyan"))
+                                break
                 elif usrinput == "hint":
                     hints = 3
                     # I honestly don't even understand what this does
@@ -248,7 +305,7 @@ def learn_words():
                         print(colored("Incorrect", "red") + ". The right answer was: " + colored(article, "cyan"), colored(lword, "cyan"))
                         break
                 else:
-                    print("what")
+                    print(usrinput, lword, word, hint_number, try_number, article, articles, formal, formality)
             else:
                 if usrinput == lword.lower():
                     print(colored("Correct", "green") + "!")
@@ -583,13 +640,19 @@ def settings_change():
 
             if usrinput == "" or usrinput == "y" or usrinput == "yes":
                 if t == 0:
-                    settings_file["formality"] = False
+                    if settings_file["formality"] == True:
+                        settings_file["formality"] = False
+                        print("Successfully changed to " + colored(settings_file["formality"], "cyan") + ".")
+                    else:
+                        print(colored("Cancelled", "cyan") + ".")
                 else:
-                    settings_file["formality"] = True
-
-                print("Successfully changed to " + colored(settings_file["formality"], "cyan") + ".")
+                    if settings_file["formality"] == False:
+                        settings_file["formality"] = True
+                        print("Successfully changed to " + colored(settings_file["formality"], "cyan") + ".")
+                    else:
+                        print(colored("Cancelled", "cyan") + ".")
             else:
-                pass
+                print(colored("Cancelled", "cyan") + ".")
 
         elif usrinput == "3":
             # This is set to 1 and if the user types y/yes/nothing it changes
@@ -606,14 +669,19 @@ def settings_change():
 
             if usrinput == "" or usrinput == "y" or usrinput == "yes":
                 if t == 0:
-                    settings_file["grammatical_articles"] = False
+                    if settings_file["grammatical_articles"] == True:
+                        settings_file["grammatical_articles"] = False
+                        print("Successfully changed to " + colored(settings_file["grammatical_articles"], "cyan") + ".")
+                    else:
+                        print(colored("Cancelled", "cyan") + ".")
                 else:
-                    settings_file["grammatical_articles"] = True
+                    if settings_file["grammatical_articles"] == False:
+                        settings_file["grammatical_articles"] = True
+                        print("Successfully changed to " + colored(settings_file["grammatical_articles"], "cyan") + ".")
+                    else:
+                        print(colored("Cancelled", "cyan") + ".")
             else:
-                pass
-            
-            settings("save", settings_file)
-            print("Successfully changed to " + colored(settings_file["grammatical_articles"], "cyan") + ".")
+                print(colored("Cancelled", "cyan") + ".")
 
         elif usrinput == "4":
             print("Are you sure you want to reset settings? This " + colored("cannot", "red") + " be undone.")
