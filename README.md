@@ -3,10 +3,13 @@ _lang_ is a language learning program to learn and view words. All languages are
 
 Version: 0.0.2
 
+
 ## Features
 - Word learning
 - Word viewing
 - Adding words (not yet implemented)
+
+Currently supported operating systems: GNU/Linux (Arch)
 
 
 ## Languages currently available:
