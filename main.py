@@ -1,6 +1,5 @@
 import subprocess
 import time
-import functions
 import json
 
 try:
@@ -14,6 +13,7 @@ except:
 	functions.clear()
 	from termcolor import colored
 
+import functions
 
 
 data = []
