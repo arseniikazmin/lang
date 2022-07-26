@@ -12,6 +12,9 @@ ARTICLES_LIST= "das", "die", "der", "el", "la", "lo", "los", "las"
 # change it to "cls" or run the script inside a
 # Powershell.
 CLEAR_FUNCTION = "clear"
+DIR_PATH = os.path.dirname(os.path.realpath(__file__))
+
+print(DIR_PATH)
 
 # language
 lang = "es"
@@ -24,15 +27,15 @@ def clear():
 
 def settings(tp="load", set_dict=[]):
     if tp == "save":
-        with open("settings.json", "w") as f:
+        with open(DIR_PATH + "/settings.json", "w") as f:
             json.dump(set_dict, f, indent=4) # wrting to json with indentation 4
     elif tp == "load":
-        with open("settings.json", "r") as f:
+        with open(DIR_PATH + "/settings.json", "r") as f:
             return json.load(f) # returning the loaded settings file
 
 
 def load_words(lang=lang, name="all"):
-    with open(os.getcwd() + f"/languages/{lang}/{name}.csv", "r") as f:
+    with open(DIR_PATH + f"/languages/{lang}/{name}.csv", "r") as f:
         csvReader = csv.reader(f)
 
         fields = next(csvReader)

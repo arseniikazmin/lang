@@ -1,6 +1,7 @@
 import subprocess
 import time
 import json
+import os
 
 try:
 	from termcolor import colored
@@ -18,8 +19,9 @@ functions.clear()
 
 data = []
 version = ""
+DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 
-with open("data.json", "r") as f:
+with open(DIR_PATH + "/data.json", "r") as f:
     data = json.load(f)
     version = data["version"]
 
