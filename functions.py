@@ -27,10 +27,10 @@ def clear():
 
 def settings(tp="load", set_dict=[]):
     if tp == "save":
-        with open(DIR_PATH + "/settings.json", "w") as f:
+        with open(DIR_PATH + "/gamefiles/settings.json", "w") as f:
             json.dump(set_dict, f, indent=4) # wrting to json with indentation 4
     elif tp == "load":
-        with open(DIR_PATH + "/settings.json", "r") as f:
+        with open(DIR_PATH + "/gamefiles/settings.json", "r") as f:
             return json.load(f) # returning the loaded settings file
 
 
@@ -43,7 +43,7 @@ def load_words(lang=lang, name="all"):
 
         for row in csvReader:
             rows.append(row)
-        
+
         return rows, fields
 
 
@@ -152,7 +152,7 @@ def learn_words():
 
         if q == 1:
             return
-        
+
         words = load_words(lang, name)
 
     if q == 1:
@@ -228,7 +228,7 @@ def learn_words():
                                     lword[i] = "c"
                                 elif lword[i].lower() == "ş":
                                     lword[i] = "s"
-                        lword = ''.join(lword)                        
+                        lword = ''.join(lword)
 
                         if usrinput == article + " " + lword.lower():
                             print(colored("Correct", "green") + "!")
@@ -269,7 +269,7 @@ def learn_words():
                                     lword[i] = "c"
                                 elif lword[i].lower() == "ş":
                                     lword[i] = "s"
-                        lword = ''.join(lword)                        
+                        lword = ''.join(lword)
 
                         if usrinput == lword.lower():
                             print(colored("Correct", "green") + "!" + colored(" However, next time pay attention to the accents.", "yellow"))
@@ -337,10 +337,10 @@ def learn_words():
                     else:
                         print(colored("Incorrect", "red") + ". The right answer was: " + colored(lword, "cyan"))
                         break
-        
+
         if q == 1: # If the user typed "exit" then this will break the loop
             break
-    
+
     input("Press ENTER to go back...") # Self explanatory
 
 
@@ -392,7 +392,7 @@ def view_words():
                 break
             else:
                 print(colored("error", "red") + f": {usrinput}: invalid option.")
-        
+
         if q == 1:
             return
 
@@ -442,8 +442,8 @@ def view_words():
                 break
             else:
                 print(colored("error", "red") + f": {usrinput}: invalid option.")
-            
-        
+
+
             words = load_words(lang, name)
 
         if q == 1:
@@ -484,7 +484,7 @@ def add_words():
     elif settings_file["def_lang"] == "es":
         lang = "es"
         lang_name = "Spanish"
-    
+
     print("Select language:")
     print("1. Turkish")
     print("2. German")
@@ -517,7 +517,7 @@ def add_words():
             break
         else:
             print(colored("error", "red") + f": {usrinput}: invalid option.")
-    
+
     if q == 1:
         return
 
@@ -562,7 +562,7 @@ def add_words():
                 break
             else:
                 print(colored("error", "red") + f": {usrinput}: invalid input. Only 0, 1 and 2 are acceptable.")
-        
+
         if enword and lword != "":
             print("asdasd")
         else:
