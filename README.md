@@ -27,3 +27,4 @@ In order to uninstall lang, type `sudo ./install.sh uninstall $USER` the same wa
 Locations of files when installing lang with the `install.sh` script:
 - `/home/$USER/.lang`     <-- game directory
 - `/usr/bin/lang`         <-- executable
+_This project was originally hosted on GitLab_
