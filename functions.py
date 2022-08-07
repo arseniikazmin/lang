@@ -114,7 +114,7 @@ def learn_words():
         print("5. Months")
         print("6. Numbers")
         print("7. Numbers (extended)")
-        if lang == "de":
+        if lang in ["de", "es"]:
             print("8. Countries")
 
         # This asks for user's input and based on what they enter
@@ -144,7 +144,7 @@ def learn_words():
             elif usrinput == "7":
                 name = "numbers_full"
                 break
-            elif usrinput == "8" and lang == "de":
+            elif usrinput == "8" and lang in ["de", "es"]:
                 name = "countries"
                 break
             elif usrinput == "exit":
@@ -174,6 +174,7 @@ def learn_words():
         hint_number = 0 # How many hints the user has already used. When this reaches 3, the word skips
         try_number = 0 # How many tries the user has made. Has a limit of 3
         formality = "" # 0 = no, 1 = yes
+        lword_nochange = ""
 
         if formal == "0":
             formality = "no"
@@ -209,32 +210,54 @@ def learn_words():
                         print(colored("Correct", "green") + "!")
                         break
                     else:
+                        lword_nochange = lword
                         lword = list(lword)
 
                         for i in range(0, len(lword)):
-                            if lword[i].lower() in ["í", "ó", "é", "ä", "ö", "ü", "ß", "ı", "ç", "ş"]:
-                                if lword[i].lower() == "í":
-                                    lword[i] = "i"
-                                elif lword[i].lower() == "ó":
+                            if lword[i] in ["í", "ì", "ï", "ó", "ò", "ö",
+                                                    "é", "è", "ë", "á", "à", "ä",
+                                                    "ú", "ù", "ü", "ß", "ı", "ç", "ş",
+                                                    "Í", "Ì", "Ï", "Ó", "Ò", "Ö",
+                                                    "É", "È", "Ë", "Á", "À", "Ä",
+                                                    "Ú", "Ù", "Ü", "ẞ", "İ", "Ç", "Ş"]:
+                                if lword[i] in ["Í", "Ì", "Ï"]:
+                                    lword[i] = "I"
+                                elif lword[i] in ["Ó", "Ò", "Ö"]:
+                                    lword[i] = "O"
+                                elif lword[i] in ["É", "È", "Ë"]:
+                                    lword[i] = "E"
+                                elif lword[i] in ["Á", "À", "Ä"]:
+                                    lword[i] = "A"
+                                elif lword[i] in ["Ú", "Ù", "Ü"]:
+                                    lword[i] = "U"
+                                elif lword[i] == "ẞ":
+                                    lword[i] = "SS"
+                                elif lword[i] == "İ":
+                                    lword[i] = "I"
+                                elif lword[i] == "Ç":
+                                    lword[i] = "C"
+                                elif lword[i] == "Ş":
+                                    lword[i] = "S"
+                                elif lword[i] in ["ó", "ò", "ö"]:
                                     lword[i] = "o"
-                                elif lword[i].lower() == "é":
+                                elif lword[i] in ["é", "è", "ë"]:
                                     lword[i] = "e"
-                                elif lword[i].lower() == "ä":
+                                elif lword[i] in ["á", "à", "ä"]:
                                     lword[i] = "a"
-                                elif lword[i].lower() == "ü":
+                                elif lword[i] in ["ú", "ù", "ü"]:
                                     lword[i] = "u"
-                                elif lword[i].lower() == "ß":
+                                elif lword[i] == "ß":
                                     lword[i] = "ss"
-                                elif lword[i].lower() == "ı":
+                                elif lword[i] == "ı":
                                     lword[i] = "i"
-                                elif lword[i].lower() == "ç":
+                                elif lword[i] == "ç":
                                     lword[i] = "c"
-                                elif lword[i].lower() == "ş":
+                                elif lword[i] == "ş":
                                     lword[i] = "s"
                         lword = ''.join(lword)
 
-                        if usrinput == article + " " + lword.lower():
-                            print(colored("Correct", "green") + "!")
+                        if usrinput.lower() == article.lower() + lword.lower():
+                            print(colored("Correct", "green") + "!" + " The correct word was " + colored(lword_nochange, "yellow") + ".")
                             break
                         else:
                             try_number += 1 # Increment try_number by 1
@@ -250,33 +273,54 @@ def learn_words():
                         print(colored("Correct", "green") + "!")
                         break
                     else:
+                        lword_nochange = lword
                         lword = list(lword)
 
                         for i in range(0, len(lword)):
-                            if lword[i].lower() in ["í", "ó", "é", "ä", "ö", "ü", "ß", "ı", "ç", "ş",]:
-                                if lword[i].lower() == "í":
-                                    lword[i] = "i"
-                                elif lword[i].lower() == "ó":
+                            if lword[i] in ["í", "ì", "ï", "ó", "ò", "ö",
+                                                    "é", "è", "ë", "á", "à", "ä",
+                                                    "ú", "ù", "ü", "ß", "ı", "ç", "ş",
+                                                    "Í", "Ì", "Ï", "Ó", "Ò", "Ö",
+                                                    "É", "È", "Ë", "Á", "À", "Ä",
+                                                    "Ú", "Ù", "Ü", "ẞ", "İ", "Ç", "Ş"]:
+                                if lword[i] in ["Í", "Ì", "Ï"]:
+                                    lword[i] = "I"
+                                elif lword[i] in ["Ó", "Ò", "Ö"]:
+                                    lword[i] = "O"
+                                elif lword[i] in ["É", "È", "Ë"]:
+                                    lword[i] = "E"
+                                elif lword[i] in ["Á", "À", "Ä"]:
+                                    lword[i] = "A"
+                                elif lword[i] in ["Ú", "Ù", "Ü"]:
+                                    lword[i] = "U"
+                                elif lword[i] == "ẞ":
+                                    lword[i] = "SS"
+                                elif lword[i] == "İ":
+                                    lword[i] = "I"
+                                elif lword[i] == "Ç":
+                                    lword[i] = "C"
+                                elif lword[i] == "Ş":
+                                    lword[i] = "S"
+                                elif lword[i] in ["ó", "ò", "ö"]:
                                     lword[i] = "o"
-                                elif lword[i].lower() == "é":
+                                elif lword[i] in ["é", "è", "ë"]:
                                     lword[i] = "e"
-                                elif lword[i].lower() == "ä":
+                                elif lword[i] in ["á", "à", "ä"]:
                                     lword[i] = "a"
-                                elif lword[i].lower() == "ü":
+                                elif lword[i] in ["ú", "ù", "ü"]:
                                     lword[i] = "u"
-                                elif lword[i].lower() == "ß":
+                                elif lword[i] == "ß":
                                     lword[i] = "ss"
-                                elif lword[i].lower() == "ı": # this is "ı"
+                                elif lword[i] == "ı":
                                     lword[i] = "i"
-                                elif lword[i].lower() == "ç":
+                                elif lword[i] == "ç":
                                     lword[i] = "c"
-                                elif lword[i].lower() == "ş":
+                                elif lword[i] == "ş":
                                     lword[i] = "s"
                         lword = ''.join(lword)
 
-                        if usrinput == lword.lower():
-                            print(colored("Correct", "green") + "!" + colored(" However, next time pay attention to the accents.", "yellow"))
-                            print(colored("They are essential in language learning.", "yellow"))
+                        if usrinput.lower() == lword.lower():
+                            print(colored("Correct", "green") + "!" + " The correct word was " + colored(lword_nochange, "yellow") + ".")
                             break
                         else:
                             try_number += 1 # Increment try_number by 1
