@@ -1,7 +1,7 @@
 # _lang_
 lang is a language learning program to learn and view words. All languages are divided into categories, i.e. food, colors, months, etc.
 
-Version: 0.0.2
+Version: 0.0.2de
 
 
 ## Features
