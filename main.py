@@ -10,8 +10,8 @@ except:
 	time.sleep(0.5)
 	subprocess.run("pip3 install termcolor", shell=True)
 	print("Dependencies successfully installed.")
-	time.sleep(1)
-	from termcolor import colored
+    print("Please restart the program to start using it.")
+    exit()
 
 import functions
 functions.clear()
