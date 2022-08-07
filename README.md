@@ -12,7 +12,7 @@ Version: 0.0.2de
 
 ## Currently supported operating systems
 - GNU/Linux (tested on Arch Linux, should work on all Linux distributions)
-- macOS (never tested, installation script will most likely not work, but the program itself should)
+- macOS (never tested (I don't have a Macbook 😔), installation script will most likely not work, but the program itself should)
 
 ## Available languages:
 - Spanish 🇪🇸 🇲🇽
