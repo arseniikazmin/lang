@@ -114,6 +114,8 @@ def learn_words():
         print("5. Months")
         print("6. Numbers")
         print("7. Numbers (extended)")
+        if lang == "de":
+            print("8. Countries")
 
         # This asks for user's input and based on what they enter
         # the "name" variable will be changed. It is used for
@@ -141,6 +143,9 @@ def learn_words():
                 break
             elif usrinput == "7":
                 name = "numbers_full"
+                break
+            elif usrinput == "8" and lang == "de":
+                name = "countries"
                 break
             elif usrinput == "exit":
                 q = 1
@@ -404,6 +409,8 @@ def view_words():
         print("5. Months")
         print("6. Numbers")
         print("7. Numbers (extended)")
+        if lang == "de":
+            print("8. Countries")
 
         while True:
             usrinput = input(colored(" ==> ", "cyan")).lower()
@@ -428,6 +435,9 @@ def view_words():
                 break
             elif usrinput == "7":
                 name = "numbers_full"
+                break
+            elif usrinput == "8" and lang == "de":
+                name = "countries"
                 break
             elif usrinput == "clear":
                 clear()
