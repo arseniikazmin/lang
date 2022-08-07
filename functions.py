@@ -5,20 +5,18 @@ import os
 import csv
 from termcolor import colored
 
-# const
+
 ARTICLES_LIST= "das", "die", "der", "el", "la", "lo", "los", "las"
-# The clear() function uses this variable. If you
-# are using Microsoft Windows, you should either
-# change it to "cls" or run the script inside a
-# Powershell.
+# The clear() function uses this variable. If you are using Microsoft Windows,
+# you should either change it to "cls" or run the script inside a Powershell.
 CLEAR_FUNCTION = "clear"
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 
 print(DIR_PATH)
 
-# language
-lang = "es"
-lang_name = "Spanish"
+# the default language is Spanish
+lang = "es" # language code
+lang_name = "Spanish" # language name
 
 
 def clear():
@@ -526,50 +524,66 @@ def add_words():
     enword = "" # The English word
     lword = "" # The word in the language the user has selected
     formality = 0 # Formality. 0 = no, 1 = yes, 2 = doesn't matter. Set to 0 by default
+    article = ""
 
     if lang in ["tr", "de", "es"]:
-        print(colored("\x1B[3mi\x1B[0m", "green") + f": Enter an English name and then the {lang_name} counterpart afterwards.")
-        print(colored("\x1B[3mi\x1B[0m", "green") + ": If you spelled a word incorrectly, you can type \"!back\"; it will cancel the process.")
+        print(colored("\x1B[3mi\x1B[0m", "green") + f": Enter an English word and then the {lang_name} counterpart afterwards.")
+        print(colored("\x1B[3mi\x1B[0m", "green") + ": If you spelled a word incorrectly, you can type \"!back\". It will cancel the process.")
 
         while True:
             lword = "" # The English word
             enword = "" # The word in the language the user has selected
             formality = 0 # Formality. 0 = no, 1 = yes, 2 = doesn't matter. Set to 0 by default
 
-            usrinput = input(colored(" en ==> "))
+            usrinput = input(" en ==> ")
             if usrinput.lower() == "!back":
                 break
             else:
                 enword = usrinput
 
-            usrinput = input(colored(f" {lang} ==> "))
+            usrinput = input(f" {lang} ==> ")
             if usrinput.lower() == "!back":
                 break
             else:
                 lword = usrinput
 
-            usrinput = input(colored(f" formality ==> "))
+            print("Now choose the formality of the word. 0 means informal, 1 means formal, 2 means that it doesn't matter.")
+            usrinput = input(" formality ==> ")
             if usrinput.lower() == "!back":
                 break
             elif usrinput == "0":
                 formality = 0
-                break
             elif usrinput == "1":
-                formality == 1
-                break
+                formality = 1
             elif usrinput == "2":
-                formality == 1
-                break
+                formality = 2
             else:
-                print(colored("error", "red") + f": {usrinput}: invalid input. Only 0, 1 and 2 are acceptable.")
+                formality = 2
+            
+            print("Enter the grammatical article for the word. Enter !skip if there is no article.")
+            usrinput = input(" article ==> ")
+            if usrinput.lower() != "!skip":
+                article = usrinput
 
-        if enword and lword != "":
-            print("asdasd")
-        else:
-            print(enword, lword, formality)
+            print(f"English word: {enword}")
+            print(f"{lang_name} word: {lword}")
+            print(f"Formality: {formality}")
 
-    if q == 1:
-        return
+            if article == "":
+                print(f"Grammatical article: none")
+            else:
+                print(f"Grammatical article: {article}")
+
+            print("Is this correct? [Y/n] ", end='')
+            usrinput = input().lower()
+            if usrinput == "" or usrinput == "yes" or usrinput == "y":
+                print("add the word") # WORK IN PROGRESS
+            else:
+                return
+            
+            input("Press ENTER to continue...")
+            return
+
 
 def settings_change():
     settings_file = settings("load")
