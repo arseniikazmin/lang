@@ -6,10 +6,10 @@ import os
 try:
 	from termcolor import colored
 except:
-	print("Termcolor module not installed. Installing...")
-	time.sleep(0.5)
-	subprocess.run("pip3 install termcolor", shell=True)
-	print("Dependencies successfully installed.")
+    print("Termcolor module not installed. Installing...")
+    time.sleep(0.5)
+    subprocess.run("pip3 install termcolor", shell=True)
+    print("Dependencies successfully installed.")
     print("Please restart the program to start using it.")
     exit()
 
