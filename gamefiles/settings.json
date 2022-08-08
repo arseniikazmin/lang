@@ -1,5 +1,18 @@
 {
     "def_lang": "",
-    "formality": false,
-    "grammatical_articles": true
+    "formality": true,
+    "grammatical_articles": false,
+    "colors": {
+        "header_color": "magenta",
+        "engword_color": "magenta",
+        "lword_color": "cyan",
+        "lword_nochange_color": "yellow",
+        "formal_color": "cyan",
+        "article_color": "cyan",
+        "input_color": "cyan",
+        "error_color": "red",
+        "correct_color": "green",
+        "incorrect_color": "red",
+        "hint_color": "magenta"
+    }
 }

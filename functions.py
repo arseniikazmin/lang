@@ -19,6 +19,34 @@ lang = "es" # language code
 lang_name = "Spanish" # language name
 
 
+header_color = ""
+engword_color = ""
+lword_color = ""
+lword_nochange_color = ""
+formal_color = ""
+article_color = ""
+input_color = ""
+error_color = ""
+correct_color = ""
+incorrect_color = ""
+hint_color = ""
+
+with open("gamefiles/settings.json", "r") as f:
+        config = json.load(f)
+
+        header_color = config["colors"]["header_color"]
+        engword_color = config["colors"]["engword_color"]
+        lword_color = config["colors"]["lword_color"]
+        formal_color = config["colors"]["formal_color"]
+        article_color = config["colors"]["article_color"]
+        input_color = config["colors"]["input_color"]
+        error_color = config["colors"]["error_color"]
+        correct_color = config["colors"]["correct_color"]
+        incorrect_color = config["colors"]["incorrect_color"]
+        lword_nochange_color = config["colors"]["lword_nochange_color"]
+        hint_color = config["colors"]["hint_color"]
+
+
 def clear():
     subprocess.run(CLEAR_FUNCTION, shell=True)
 
@@ -71,7 +99,7 @@ def learn_words():
         print("3. Spanish")
 
         while True:
-            usrinput = input(colored(" ==> ", "cyan")).lower()
+            usrinput = input(colored(" ==> ", input_color)).lower()
 
             if usrinput == "1" or usrinput == "turkish":
                 lang = "tr"
@@ -100,7 +128,7 @@ def learn_words():
                 break
 
             else:
-                print(colored("error", "red") + f": {usrinput}: invalid option.")
+                print(colored("error", error_color) + f": {usrinput}: invalid option.")
 
         if q == 1:
             return
@@ -122,7 +150,7 @@ def learn_words():
         # the "name" variable will be changed. It is used for
         # opennig .csv files with all the words.
         while True:
-            usrinput = input(colored(" ==> ", "cyan")).lower()
+            usrinput = input(colored(" ==> ", input_color)).lower()
 
             if usrinput == "1":
                 name = "all"
@@ -155,7 +183,7 @@ def learn_words():
                 q = 1
                 break
             else:
-                print(colored("error", "red") + f": {usrinput}: invalid option.")
+                print(colored("error", error_color) + f": {usrinput}: invalid option.")
 
         if q == 1:
             return
@@ -190,16 +218,16 @@ def learn_words():
         while True:
             if formal != "2": # If formality doesn't matter
                 if articles == True:
-                    print(f"Enter the {lang_name} word for " + colored(word, "magenta") + " with the proper grammatical article. Formal?: " + colored(formality, "cyan"))
+                    print(f"Enter the {lang_name} word for " + colored(word, engword_color) + " with the proper grammatical article. Formal?: " + colored(formality, formal_color))
                 else:
-                    print(f"Enter the {lang_name} word for " + colored(word, "magenta") + ". Formal?: " + colored(formality, "cyan"))
+                    print(f"Enter the {lang_name} word for " + colored(word, engword_color) + ". Formal?: " + colored(formality, formal_color))
             else: # If it does
                 if articles == True:
-                    print(f"Enter the {lang_name} word for " + colored(word, "magenta") + " with the proper grammatical article.")
+                    print(f"Enter the {lang_name} word for " + colored(word, engword_color) + " with the proper grammatical article.")
                 else:
-                    print(f"Enter the {lang_name} word for " + colored(word, "magenta") + ".")
+                    print(f"Enter the {lang_name} word for " + colored(word, engword_color) + ".")
 
-            print(colored(" ╰─> ", "cyan"), end="")
+            print(colored(" ╰─> ", input_color), end="")
 
             usrinput = input().lower()
 
@@ -211,7 +239,7 @@ def learn_words():
                 if articles == True and usrinput != "hint" and usrinput != "exit":
                     # If the word that the user is article+word, i.e. "el pan"
                     if usrinput == article + " " + lword.lower():
-                        print(colored("Correct", "green") + "!")
+                        print(colored("Correct", correct_color) + "!")
                         break
                     else:
                         lword_nochange = lword
@@ -261,20 +289,20 @@ def learn_words():
                         lword = ''.join(lword)
 
                         if usrinput.lower() == article.lower() + lword.lower():
-                            print(colored("Correct", "green") + "!" + " The correct word was " + colored(lword_nochange, "yellow") + ".")
+                            print(colored("Correct", correct_color) + "!" + " The correct word was " + colored(lword_nochange, lword_nochange_color) + ".")
                             break
                         else:
                             try_number += 1 # Increment try_number by 1
 
                             if try_number <= 2: # If try_number hasn't reached 3
-                                print(colored("Incorrect", "red") + ". Try again.")
+                                print(colored("Incorrect", error_color) + ". Try again.")
                             else: # Else, tell the user the word
-                                print(colored("Incorrect", "red") + ". The right answer was: " + colored(article, "cyan"), colored(lword, "cyan"))
+                                print(colored("Incorrect", error_color) + ". The right answer was: " + colored(article, article_color), colored(lword, lword_color))
                                 break
                 # If articles are disabled AND the user hasn't tried to use a hint/exit
                 elif articles == False and usrinput != "hint" and usrinput != "exit":
                     if usrinput == lword.lower():
-                        print(colored("Correct", "green") + "!")
+                        print(colored("Correct", correct_color) + "!")
                         break
                     else:
                         lword_nochange = lword
@@ -324,15 +352,15 @@ def learn_words():
                         lword = ''.join(lword)
 
                         if usrinput.lower() == lword.lower():
-                            print(colored("Correct", "green") + "!" + " The correct word was " + colored(lword_nochange, "yellow") + ".")
+                            print(colored("Correct", correct_color) + "!" + " The correct word was " + colored(lword_nochange, lword_nochange_color) + ".")
                             break
                         else:
                             try_number += 1 # Increment try_number by 1
 
                             if try_number <= 2: # If try_number hasn't reached 3
-                                print(colored("Incorrect", "red") + ". Try again.")
+                                print(colored("Incorrect", error_color) + ". Try again.")
                             else: # Else, tell the user the word
-                                print(colored("Incorrect", "red") + ". The right answer was: " + colored(lword, "cyan"))
+                                print(colored("Incorrect", error_color) + ". The right answer was: " + colored(lword, lword_color))
                                 break
                 elif usrinput == "hint":
                     hints = 3
@@ -343,7 +371,7 @@ def learn_words():
                         pass
 
                     if hint_number < hints:
-                        print(colored("Hint", "magenta") + f": {lword[hint_number]}")
+                        print(colored("Hint", hint_color) + f": {lword[hint_number]}")
                         hint_number += 1
                     else:
                         print("No hints left")
@@ -354,15 +382,15 @@ def learn_words():
                     try_number += 1 # Increment try_number by 1
 
                     if try_number <= 2: # If try_number hasn't reached 3
-                        print(colored("Incorrect", "red") + ". Try again.")
+                        print(colored("Incorrect", error_color) + ". Try again.")
                     else: # Else, tell the user the word
-                        print(colored("Incorrect", "red") + ". The right answer was: " + colored(article, "cyan"), colored(lword, "cyan"))
+                        print(colored("Incorrect", error_color) + ". The right answer was: " + colored(article, article_color), colored(lword, lword_color))
                         break
                 else:
                     print(usrinput, lword, word, hint_number, try_number, article, articles, formal, formality)
             else:
                 if usrinput == lword.lower():
-                    print(colored("Correct", "green") + "!")
+                    print(colored("Correct", correct_color) + "!")
                     break
                 elif usrinput == "hint":
                     hints = 3
@@ -373,7 +401,7 @@ def learn_words():
                         pass
 
                     if hint_number < hints:
-                        print(colored("Hint", "magenta") + f": {lword[hint_number]}")
+                        print(colored("Hint", hint_color) + f": {lword[hint_number]}")
                         hint_number += 1
                     else:
                         print("No hints left")
@@ -384,9 +412,9 @@ def learn_words():
                     try_number += 1
 
                     if try_number <= 2:
-                        print(colored("Incorrect", "red") + ". Try again.")
+                        print(colored("Incorrect", error_color) + ". Try again.")
                     else:
-                        print(colored("Incorrect", "red") + ". The right answer was: " + colored(lword, "cyan"))
+                        print(colored("Incorrect", error_color) + ". The right answer was: " + colored(lword, lword_color))
                         break
 
         if q == 1: # If the user typed "exit" then this will break the loop
@@ -418,7 +446,7 @@ def view_words():
         print("3. Spanish")
 
         while True:
-            usrinput = input(colored(" ==> ", "cyan")).lower()
+            usrinput = input(colored(" ==> ", input_color)).lower()
 
             if usrinput == "1" or usrinput == "turkish":
                 lang = "tr"
@@ -442,7 +470,7 @@ def view_words():
                 q = 1
                 break
             else:
-                print(colored("error", "red") + f": {usrinput}: invalid option.")
+                print(colored("error", error_color) + f": {usrinput}: invalid option.")
 
         if q == 1:
             return
@@ -462,7 +490,7 @@ def view_words():
         print("9. Custom words")
 
         while True:
-            usrinput = input(colored(" ==> ", "cyan")).lower()
+            usrinput = input(colored(" ==> ", input_color)).lower()
 
             if usrinput == "1":
                 name = "all"
@@ -501,7 +529,7 @@ def view_words():
                 q = 1
                 break
             else:
-                print(colored("error", "red") + f": {usrinput}: invalid option.")
+                print(colored("error", error_color) + f": {usrinput}: invalid option.")
 
 
             words = load_words(lang, name)
@@ -518,11 +546,11 @@ def view_words():
 
         if articles == True:
             if article != "none":
-                print(colored(i + 1, "green") + ".", colored(row[0], "blue"), "-", colored(row[3], "cyan"), colored(row[1], "cyan"))
+                print(colored(i + 1, "green") + ".", colored(row[0], engword_color), "-", colored(row[3], article_color), colored(row[1], lword_color))
             else:
-                print(colored(i + 1, "green") + ".", colored(row[0], "blue"), "-", colored(row[1], "cyan"))
+                print(colored(i + 1, "green") + ".", colored(row[0], engword_color), "-", colored(row[1], lword_color))
         else:
-            print(colored(i + 1, "green") + ".", colored(row[0], "blue"), "-", colored(row[1], "cyan"))
+            print(colored(i + 1, "green") + ".", colored(row[0], engword_color), "-", colored(row[1], lword_color))
 
         i += 1
 
@@ -551,7 +579,7 @@ def add_words():
     print("3. Spanish")
 
     while True:
-        usrinput = input(colored(" ==> ", "cyan")).lower()
+        usrinput = input(colored(" ==> ", input_color)).lower()
 
         if usrinput == "1" or usrinput == "turkish":
             lang = "tr"
@@ -576,7 +604,7 @@ def add_words():
 
             break
         else:
-            print(colored("error", "red") + f": {usrinput}: invalid option.")
+            print(colored("error", error_color) + f": {usrinput}: invalid option.")
 
     if q == 1:
         return
@@ -655,7 +683,7 @@ def add_words():
 def settings_change():
     settings_file = settings("load")
 
-    print(colored("Settings", "magenta"))
+    print(colored("Settings", header_color))
     print("1. Change default language")
     print("2. Toggle formality on/off (showing if the word is formal or not)")
     print("3. Toggle articles on/off")
@@ -663,11 +691,11 @@ def settings_change():
 
 
     while True:
-        usrinput = input(colored(" settings ==> ", "cyan"))
+        usrinput = input(colored(" settings ==> ", input_color))
 
         if usrinput == "1":
             print("Enter your preferred language")
-            usrinput = input(" [ES/de/tr] " + colored("==> ", "cyan")).lower()
+            usrinput = input(" [ES/de/tr] " + colored("==> ", input_color)).lower()
 
             if usrinput == "tr" or usrinput == "turkish":
                 if usrinput == settings_file["def_lang"]:
@@ -707,7 +735,7 @@ def settings_change():
                 pass
 
             else:
-                print(colored("error", "red") + f": {usrinput}: ivalid language number/name/code.")
+                print(colored("error", error_color) + f": {usrinput}: ivalid language number/name/code.")
 
         elif usrinput == "2":
             # This is set to 1 and if the user types y/yes/nothing it changes
@@ -726,17 +754,17 @@ def settings_change():
                 if t == 0:
                     if settings_file["formality"] == True:
                         settings_file["formality"] = False
-                        print("Successfully changed to " + colored(settings_file["formality"], "cyan") + ".")
+                        print("Successfully changed to " + colored(settings_file["formality"], formal_color) + ".")
                     else:
-                        print(colored("Cancelled", "cyan") + ".")
+                        print(colored("Cancelled", error_color) + ".")
                 else:
                     if settings_file["formality"] == False:
                         settings_file["formality"] = True
-                        print("Successfully changed to " + colored(settings_file["formality"], "cyan") + ".")
+                        print("Successfully changed to " + colored(settings_file["formality"], formal_color) + ".")
                     else:
-                        print(colored("Cancelled", "cyan") + ".")
+                        print(colored("Cancelled", error_color) + ".")
             else:
-                print(colored("Cancelled", "cyan") + ".")
+                print(colored("Cancelled", error_color) + ".")
 
         elif usrinput == "3":
             # This is set to 1 and if the user types y/yes/nothing it changes
@@ -755,26 +783,37 @@ def settings_change():
                 if t == 0:
                     if settings_file["grammatical_articles"] == True:
                         settings_file["grammatical_articles"] = False
-                        print("Successfully changed to " + colored(settings_file["grammatical_articles"], "cyan") + ".")
+                        print("Successfully changed to " + colored(settings_file["grammatical_articles"], formal_color) + ".")
                     else:
-                        print(colored("Cancelled", "cyan") + ".")
+                        print(colored("Cancelled", error_color) + ".")
                 else:
                     if settings_file["grammatical_articles"] == False:
                         settings_file["grammatical_articles"] = True
-                        print("Successfully changed to " + colored(settings_file["grammatical_articles"], "cyan") + ".")
+                        print("Successfully changed to " + colored(settings_file["grammatical_articles"], formal_color) + ".")
                     else:
-                        print(colored("Cancelled", "cyan") + ".")
+                        print(colored("Cancelled", error_color) + ".")
             else:
-                print(colored("Cancelled", "cyan") + ".")
+                print(colored("Cancelled", error_color) + ".")
 
         elif usrinput == "4":
-            print("Are you sure you want to reset settings? This " + colored("cannot", "red") + " be undone.")
-            confirm = input(" [y/N] " + colored("==> ", "magenta")).lower()
+            print("Are you sure you want to reset settings? This " + colored("cannot", error_color) + " be undone.")
+            confirm = input(" [y/N] " + colored("==> ", input_color)).lower()
 
             if confirm == "y" or confirm == "yes":
                 settings_file["def_lang"] = ""
-                settings_file["formality"] = False
-                settings_file["grammatical_articles"] = True
+                settings_file["formality"] = True
+                settings_file["grammatical_articles"] = False
+                settings_file["colors"]["header_color"] = "magenta"
+                settings_file["colors"]["engword_color"] = "magenta"
+                settings_file["colors"]["lword_color"] = "cyan"
+                settings_file["colors"]["lword_nochange_color"] = "yellow"
+                settings_file["colors"]["formal_color"] = "cyan"
+                settings_file["colors"]["article_color"] = "cyan"
+                settings_file["colors"]["input_color"] = "cyan"
+                settings_file["colors"]["error_color"] = "red"
+                settings_file["colors"]["correct_color"] = "green"
+                settings_file["colors"]["incorrect_color"] = "red"
+                settings_file["colors"]["hint_color"] = "magenta"
 
                 settings("save", settings_file)
 
@@ -782,4 +821,4 @@ def settings_change():
             break
 
         else:
-            print(colored("error", "red") + f": {usrinput}: ivalid choice.")
+            print(colored("error", error_color) + f": {usrinput}: ivalid choice.")
