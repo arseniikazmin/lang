@@ -3,13 +3,24 @@ import time
 import subprocess
 import os
 import csv
+import sys
 from termcolor import colored
 
 
 ARTICLES_LIST= "das", "die", "der", "el", "la", "lo", "los", "las"
 # The clear() function uses this variable. If you are using Microsoft Windows,
 # you should either change it to "cls" or run the script inside a Powershell.
-CLEAR_FUNCTION = "clear"
+CLEAR_FUNCTION = ""
+
+if sys.platform in ["linux", "linux1", "linux2", "darwin", "win32"]:
+    if sys.platform in ["linux", "linux1", "linux2", "darwin"]:
+        CLEAR_FUNCTION = "clear"
+    else:
+        CLEAR_FUNCTION = "cls"
+else:
+    print(f"Your operating system ({sys.platform}) is not supported.")
+    exit()
+
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 
 print(DIR_PATH)
@@ -31,7 +42,7 @@ correct_color = ""
 incorrect_color = ""
 hint_color = ""
 
-with open("gamefiles/settings.json", "r") as f:
+with open("gamefiles/settings.json", "r", encoding="utf-8") as f:
         config = json.load(f)
 
         header_color = config["colors"]["header_color"]
@@ -53,15 +64,15 @@ def clear():
 
 def settings(tp="load", set_dict=[]):
     if tp == "save":
-        with open(DIR_PATH + "/gamefiles/settings.json", "w") as f:
+        with open(DIR_PATH + "/gamefiles/settings.json", "w", encoding="utf-8") as f:
             json.dump(set_dict, f, indent=4) # wrting to json with indentation 4
     elif tp == "load":
-        with open(DIR_PATH + "/gamefiles/settings.json", "r") as f:
+        with open(DIR_PATH + "/gamefiles/settings.json", "r", encoding="utf-8") as f:
             return json.load(f) # returning the loaded settings file
 
 
 def load_words(lang=lang, name="all"):
-    with open(DIR_PATH + f"/languages/{lang}/{name}.csv", "r") as f:
+    with open(DIR_PATH + f"/languages/{lang}/{name}.csv", "r", encoding="utf-8") as f:
         csvReader = csv.reader(f)
 
         fields = next(csvReader)

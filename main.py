@@ -2,6 +2,7 @@ import subprocess
 import time
 import json
 import os
+import functions
 
 try:
 	from termcolor import colored
@@ -9,13 +10,10 @@ except:
     print("Termcolor module not installed. Installing...")
     time.sleep(0.5)
     subprocess.run("pip3 install termcolor", shell=True)
+    functions.clear()
     print("Dependencies successfully installed.")
     print("Please restart the program to start using it.")
     exit()
-
-import functions
-functions.clear()
-
 
 data = []
 version = ""
@@ -25,8 +23,7 @@ with open(DIR_PATH + "/gamefiles/data.json", "r") as f:
     data = json.load(f)
     version = data["version"]
 
-
-def main():
+if __name__ == "__main__":
     while True:
         functions.clear()
 
@@ -59,5 +56,3 @@ def main():
 
         else:
             print(colored("error", "red") + f": {usrinput}: invalid option.")
-
-main()
