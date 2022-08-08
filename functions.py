@@ -116,6 +116,7 @@ def learn_words():
         print("7. Numbers (extended)")
         if lang in ["de", "es"]:
             print("8. Countries")
+        print("9. Custom words")
 
         # This asks for user's input and based on what they enter
         # the "name" variable will be changed. It is used for
@@ -146,6 +147,9 @@ def learn_words():
                 break
             elif usrinput == "8" and lang in ["de", "es"]:
                 name = "countries"
+                break
+            elif usrinput == "9":
+                name = "custom"
                 break
             elif usrinput == "exit":
                 q = 1
@@ -455,6 +459,7 @@ def view_words():
         print("7. Numbers (extended)")
         if lang == "de":
             print("8. Countries")
+        print("9. Custom words")
 
         while True:
             usrinput = input(colored(" ==> ", "cyan")).lower()
@@ -480,8 +485,11 @@ def view_words():
             elif usrinput == "7":
                 name = "numbers_full"
                 break
-            elif usrinput == "8" and lang == "de":
+            elif usrinput == "8" and lang in ["de", "es"]:
                 name = "countries"
+                break
+            elif usrinput == "9":
+                name = "custom"
                 break
             elif usrinput == "clear":
                 clear()
@@ -624,7 +632,8 @@ def add_words():
             print(f"Formality: {formality}")
 
             if article == "":
-                print(f"Grammatical article: none")
+                article = "none"
+                print("Grammatical article: none")
             else:
                 print(f"Grammatical article: {article}")
 
@@ -634,8 +643,12 @@ def add_words():
                 print("add the word") # WORK IN PROGRESS
             else:
                 return
-            
-            input("Press ENTER to continue...")
+
+            with open(f"languages/{lang}/custom.csv", 'a') as f:
+                f.write(f"\n{enword},{lword},{formality},{article}")
+
+            print("Word successfully added!")
+
             return
 
 

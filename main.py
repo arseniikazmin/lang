@@ -33,7 +33,7 @@ def main():
         print(colored(f" --- lang v{version} ---", "green"))
         print("1. Learn words")
         print("2. View words")
-        print("3. Add words (WIP)")
+        print("3. Add custom words")
         print("4. Settings")
         print("Type exit to quit.")
 
