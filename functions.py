@@ -467,7 +467,7 @@ def view_words():
                 lang = "de"
                 lang_name = "German"
                 break
-            elif usrinput == "2" or usrinput == "spanish":
+            elif usrinput == "3" or usrinput == "spanish":
                 lang = "es"
                 lang_name = "Spanish"
                 break
