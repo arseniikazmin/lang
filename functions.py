@@ -740,7 +740,8 @@ def settings_change():
     print("1. Change default language")
     print("2. Toggle formality on/off (showing if the word is formal or not)")
     print("3. Toggle articles on/off")
-    print("4. Reset settings")
+    print("4. Change mode")
+    print("5. Reset settings")
 
 
     while True:
@@ -860,6 +861,24 @@ def settings_change():
                 print(colored("Cancelled", error_color) + ".")
 
         elif usrinput == "4":
+            print(f"Your current mode is {settings_file['mode']}.")
+            print(" Mode 1 --> typing words in the target language (i.e. German)")
+            print(" Mode 2 --> typing words in English")
+            print("Would you like to change the mode? [Y/n] ", end="")
+            usrinput = input().lower()
+
+            if usrinput == "" or usrinput == "y" or usrinput == "yes":
+                previousmode = settings_file["mode"]
+
+                if settings_file["mode"] == 1:
+                    settings_file["mode"] = 2
+                else:
+                    settings_file["mode"] = 1
+                settings("save", settings_file)
+
+                print(f"Mode successfully changed from {previousmode} ==> {settings_file['mode']}.")
+
+        elif usrinput == "5":
             print("Are you sure you want to reset settings? This " + colored("cannot", error_color) + " be undone.")
             confirm = input(" [y/N] " + colored("==> ", input_color)).lower()
 
@@ -867,6 +886,7 @@ def settings_change():
                 settings_file["def_lang"] = ""
                 settings_file["formality"] = True
                 settings_file["grammatical_articles"] = False
+                settings_file["mode"] = 1
                 settings_file["colors"]["header_color"] = "magenta"
                 settings_file["colors"]["engword_color"] = "magenta"
                 settings_file["colors"]["lword_color"] = "cyan"

@@ -2,6 +2,7 @@
     "def_lang": "",
     "formality": true,
     "grammatical_articles": false,
+    "mode": 1,
     "colors": {
         "header_color": "magenta",
         "engword_color": "magenta",
