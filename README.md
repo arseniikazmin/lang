@@ -11,12 +11,13 @@ lang is a language learning program to learn and view words. All languages are d
 ## Operating systems
 - GNU/Linux (tested on Arch Linux, should work on all Linux distributions)
 - macOS (never tested, installation script won't work, but the program itself might)
-- Windows (the program works, installation script doesn't work)
+- Windows (unusable: letters with accents are weird, installation script doesn't work)
 
 ## Available languages:
 - Spanish 🇪🇸 🇲🇽
 - German 🇩🇪
 - Turkish 🇹🇷
+- Arabic 🇪🇬 🇸🇦
 
 ## Running the program
 First, install dependencies: `pip3 install -r requirements.txt`.  
