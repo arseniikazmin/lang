@@ -1,5 +1,5 @@
 # *lang*
-lang is a language learning program to learn and view words. All languages are divided into categories, i.e. food, colors, months, etc.
+lang is a language learning program to learn, repeat and view words. All words are divided into categories, i.e. food, colors, months, etc.
 
 ## Features
 - Word learning
@@ -9,15 +9,15 @@ lang is a language learning program to learn and view words. All languages are d
 - Turning formality display on/off
 
 ## Operating systems
-- GNU/Linux (tested on Arch Linux, should work on all Linux distributions)
+- Windows (installation script doesn't work)
+- GNU/Linux (Arch Linux, should work on all Linux distributions)
 - macOS (never tested, installation script won't work, but the program itself might)
-- Windows (unusable: letters with accents are weird, installation script doesn't work)
 
 ## Available languages:
-- Spanish 🇪🇸 🇲🇽
+- Arabic 🇪🇬
 - German 🇩🇪
+- Spanish 🇪🇸🇲🇽
 - Turkish 🇹🇷
-- Arabic 🇪🇬 🇸🇦
 
 ## Running the program
 First, install dependencies: `pip3 install -r requirements.txt`.  
@@ -38,5 +38,5 @@ The installation script doesn't install files in any other directories.
 
 #### Some more information about me and this project
 I came up with the idea of this project in December 2021. I originally wanted to create this in C/C++ but due to the lack of knowledge of these languages at that time I started developing it in Python.<br><br>
-At the start this was created as a personal project to learn words for school but then I thought about making it available for others; so I continued working on it, adding some more languages and minor features such as articles/formality and perhaps adding custom words in the future.<br><br><br>
+At the start this was created as a personal project to learn words for school but then I thought about making it available for others; so I continued working on it, adding some more languages and more features such as articles, formality, adding custom words and different modes.<br><br><br>
 *This project is licensed under the MIT license*.
