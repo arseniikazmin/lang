@@ -7,7 +7,7 @@ import sys
 from termcolor import colored
 
 
-ARTICLES_LIST= "das", "die", "der", "el", "la", "lo", "los", "las"
+ARTICLES_LIST= "das", "die", "der", "el", "la", "lo", "los", "las", "ال"
 # The clear() function uses this variable. If you are using Microsoft Windows,
 # you should either change it to "cls" or run the script inside a Powershell.
 CLEAR_FUNCTION = ""
@@ -103,11 +103,15 @@ def learn_words():
     elif settings_file["def_lang"] == "es":
         lang = "es"
         lang_name = "Spanish"
+    elif settings_file["def_lang"] == "ar":
+        lang = "ar"
+        lang_name = "Arabic"
     else:
         print("Select language:")
         print("1. Turkish")
         print("2. German")
         print("3. Spanish")
+        print("4. Arabic")
 
         while True:
             usrinput = input(colored(" ==> ", input_color)).lower()
@@ -127,12 +131,18 @@ def learn_words():
                 lang_name = "Spanish"
                 break
 
+            elif usrinput == "4" or usrinput == "arabic":
+                lang = "ar"
+                lang_name = "Arabic"
+                break
+
             elif usrinput == "clear":
                 clear()
                 print("Select language:")
                 print("1. Turkish")
                 print("2. German")
                 print("3. Spanish")
+                print("4. Arabic")
 
             elif usrinput == "exit":
                 q = 1
@@ -144,7 +154,7 @@ def learn_words():
         if q == 1:
             return
 
-    if lang in ["tr", "de", "es"]: # Technically this should always be executed
+    if lang in ["tr", "de", "es", "ar"]: # Technically this should always be executed
         print("Choose a category: ")
         print("1. All words")
         print("2. Colours")
@@ -153,7 +163,7 @@ def learn_words():
         print("5. Months")
         print("6. Numbers")
         print("7. Numbers (extended)")
-        if lang in ["de", "es"]:
+        if lang in ["de", "es", "ar"]:
             print("8. Countries")
         print("9. Custom words")
 
@@ -184,7 +194,7 @@ def learn_words():
             elif usrinput == "7":
                 name = "numbers_full"
                 break
-            elif usrinput == "8" and lang in ["de", "es"]:
+            elif usrinput == "8" and lang in ["de", "es", "ar"]:
                 name = "countries"
                 break
             elif usrinput == "9":
@@ -246,7 +256,7 @@ def learn_words():
                 articles = False
 
             if True: # idk why I added this
-                # If articles are enabled AND the user hasn't tried to use a hint/exit
+                # If articles are enabled and the user hasn't tried to use a hint/exit
                 if articles == True and usrinput != "hint" and usrinput != "exit":
                     # If the word that the user is article+word, i.e. "el pan"
                     if usrinput == article + " " + lword.lower():
@@ -258,11 +268,11 @@ def learn_words():
 
                         for i in range(0, len(lword)):
                             if lword[i] in ["í", "ì", "ï", "ó", "ò", "ö",
-                                                    "é", "è", "ë", "á", "à", "ä",
-                                                    "ú", "ù", "ü", "ß", "ı", "ç", "ş",
-                                                    "Í", "Ì", "Ï", "Ó", "Ò", "Ö",
-                                                    "É", "È", "Ë", "Á", "À", "Ä",
-                                                    "Ú", "Ù", "Ü", "ẞ", "İ", "Ç", "Ş"]:
+                                            "é", "è", "ë", "á", "à", "ä",
+                                            "ú", "ù", "ü", "ß", "ı", "ç", "ş",
+                                            "Í", "Ì", "Ï", "Ó", "Ò", "Ö",
+                                            "É", "È", "Ë", "Á", "À", "Ä",
+                                            "Ú", "Ù", "Ü", "ẞ", "İ", "Ç", "Ş"]:
                                 if lword[i] in ["Í", "Ì", "Ï"]:
                                     lword[i] = "I"
                                 elif lword[i] in ["Ó", "Ò", "Ö"]:
@@ -321,11 +331,11 @@ def learn_words():
 
                         for i in range(0, len(lword)):
                             if lword[i] in ["í", "ì", "ï", "ó", "ò", "ö",
-                                                    "é", "è", "ë", "á", "à", "ä",
-                                                    "ú", "ù", "ü", "ß", "ı", "ç", "ş",
-                                                    "Í", "Ì", "Ï", "Ó", "Ò", "Ö",
-                                                    "É", "È", "Ë", "Á", "À", "Ä",
-                                                    "Ú", "Ù", "Ü", "ẞ", "İ", "Ç", "Ş"]:
+                                            "é", "è", "ë", "á", "à", "ä",
+                                            "ú", "ù", "ü", "ß", "ı", "ç", "ş",
+                                            "Í", "Ì", "Ï", "Ó", "Ò", "Ö",
+                                            "É", "È", "Ë", "Á", "À", "Ä",
+                                            "Ú", "Ù", "Ü", "ẞ", "İ", "Ç", "Ş"]:
                                 if lword[i] in ["Í", "Ì", "Ï"]:
                                     lword[i] = "I"
                                 elif lword[i] in ["Ó", "Ò", "Ö"]:
@@ -450,11 +460,15 @@ def view_words():
     elif settings_file["def_lang"] == "es":
         lang = "es"
         lang_name = "Spanish"
+    elif settings_file["def_lang"] == "ar":
+        lang = "ar"
+        lang_name = "Arabic"
     else:
         print("Select language:")
         print("1. Turkish")
         print("2. German")
         print("3. Spanish")
+        print("4. Arabic")
 
         while True:
             usrinput = input(colored(" ==> ", input_color)).lower()
@@ -471,12 +485,17 @@ def view_words():
                 lang = "es"
                 lang_name = "Spanish"
                 break
+            elif usrinput == "4" or usrinput == "arabic":
+                lang = "ar"
+                lang_name = "Arabic"
+                break
             elif usrinput == "clear":
                 clear()
                 print("Select language:")
                 print("1. Turkish")
                 print("2. German")
                 print("3. Spanish")
+                print("4. Arabic")
             elif usrinput == "exit":
                 q = 1
                 break
@@ -496,7 +515,7 @@ def view_words():
         print("5. Months")
         print("6. Numbers")
         print("7. Numbers (extended)")
-        if lang == "de":
+        if lang in ["de", "es", "ar"]:
             print("8. Countries")
         print("9. Custom words")
 
@@ -524,7 +543,7 @@ def view_words():
             elif usrinput == "7":
                 name = "numbers_full"
                 break
-            elif usrinput == "8" and lang in ["de", "es"]:
+            elif usrinput == "8" and lang in ["de", "es", "ar"]:
                 name = "countries"
                 break
             elif usrinput == "9":
@@ -536,6 +555,7 @@ def view_words():
                 print("1. Turkish")
                 print("2. German")
                 print("3. Spanish")
+                print("4. Arabic")
             elif usrinput == "exit":
                 q = 1
                 break
@@ -583,11 +603,15 @@ def add_words():
     elif settings_file["def_lang"] == "es":
         lang = "es"
         lang_name = "Spanish"
+    elif settings_file["def_lang"] == "ar":
+        lang = "ar"
+        lang_name = "Arabic"
 
     print("Select language:")
     print("1. Turkish")
     print("2. German")
     print("3. Spanish")
+    print("4. Arabic")
 
     while True:
         usrinput = input(colored(" ==> ", input_color)).lower()
@@ -604,15 +628,19 @@ def add_words():
             lang = "es"
             lang_name = "spanish"
             break
+        elif usrinput == "4" or usrinput == "arabic":
+            lang = "ar"
+            lang_name = "Arabic"
+            break
         elif usrinput == "clear":
             clear()
             print("Select language:")
             print("1. Turkish")
             print("2. German")
             print("3. Spanish")
+            print("4. Arabic")
         elif usrinput == "exit":
             q = 1
-
             break
         else:
             print(colored("error", error_color) + f": {usrinput}: invalid option.")
@@ -621,13 +649,12 @@ def add_words():
         return
 
 
-    # This is probably useless. I am not deleting it because it can break the code
     enword = "" # The English word
     lword = "" # The word in the language the user has selected
     formality = 0 # Formality. 0 = no, 1 = yes, 2 = doesn't matter. Set to 0 by default
     article = ""
 
-    if lang in ["tr", "de", "es"]:
+    if lang in ["tr", "de", "es", "ar"]:
         print(colored("\x1B[3mi\x1B[0m", "green") + f": Enter an English word and then the {lang_name} counterpart afterwards.")
         print(colored("\x1B[3mi\x1B[0m", "green") + ": If you spelled a word incorrectly, you can type \"!back\". It will cancel the process.")
 
@@ -706,7 +733,7 @@ def settings_change():
 
         if usrinput == "1":
             print("Enter your preferred language")
-            usrinput = input(" [ES/de/tr] " + colored("==> ", input_color)).lower()
+            usrinput = input(" [ES/de/ar/tr] " + colored("==> ", input_color)).lower()
 
             if usrinput == "tr" or usrinput == "turkish":
                 if usrinput == settings_file["def_lang"]:
@@ -738,6 +765,17 @@ def settings_change():
                 else:
                     settings_file["def_lang"] = "es"
                     print("Successfully changed default language to Spanish (es).")
+                    settings("save", settings_file)
+                    time.sleep(1.5)
+                break
+
+            elif usrinput == "ar" or usrinput == "arabic":
+                if usrinput == settings_file["def_lang"]:
+                    print("Your language is already set to Arabic (ar).")
+                    input("Press ENTER to go back...")
+                else:
+                    settings_file["def_lang"] = "ar"
+                    print("Successfully changed default language to Arabic (ar).")
                     settings("save", settings_file)
                     time.sleep(1.5)
                 break
