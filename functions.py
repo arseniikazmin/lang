@@ -106,6 +106,18 @@ def learn_words():
     elif settings_file["def_lang"] == "ar":
         lang = "ar"
         lang_name = "Arabic"
+
+        if settings_file["mode"] != 2:
+            print("It seems that you are learning Arabic.")
+            print("Would you like to the second mode (entering the English word as an answer)?")
+            print("You can permanently turn this on in the settings.")
+            print("This way you can learn if you don't have an Arabic keyboard.\n [Y/n] ", end="")
+            usrinput = input(colored("==> ", "cyan")).lower()
+
+            if usrinput == "" or usrinput == "y" or usrinput == "yes":
+                settings_file["mode"] = 2
+                settings("save", settings_file)
+                print("Mode successfully changed to 2.")
     else:
         print("Select language:")
         print("1. Turkish")
@@ -134,6 +146,19 @@ def learn_words():
             elif usrinput == "4" or usrinput == "arabic":
                 lang = "ar"
                 lang_name = "Arabic"
+
+                if settings_file["mode"] != 2:
+                    print("It seems that you are learning Arabic.")
+                    print("Would you like to set your mode to 2 (entering the English word as an answer)?")
+                    print("You can permanently turn this on in the settings.")
+                    print("This way you can learn if you don't have an Arabic keyboard.\n [Y/n] ", end="")
+                    usrinput = input(colored("==> ", "cyan")).lower()
+
+                    if usrinput == "" or usrinput == "y" or usrinput == "yes":
+                        settings_file["mode"] = 2
+                        settings("save", settings_file)
+                        print("Mode successfully changed to 2.")
+
                 break
 
             elif usrinput == "clear":
@@ -215,6 +240,7 @@ def learn_words():
         return
 
     rows, fields = load_words(lang, name)
+    mode = settings_file["mode"]
 
     for row in rows:
         word = row[0] # The English word
@@ -233,20 +259,32 @@ def learn_words():
             formality = "no"
         elif formal == "1":
             formality = "yes"
-        elif formal == "1":
+        elif formal == "2":
             formality = "no"
 
         while True:
-            if formal != "2": # If formality doesn't matter
+            if formal != "2":
                 if articles == True:
-                    print(f"Enter the {lang_name} word for " + colored(word, engword_color) + " with the proper grammatical article. Formal?: " + colored(formality, formal_color))
+                    if mode == 1:
+                        print(f"Enter the {lang_name} word for " + colored(word, engword_color) + " with the proper grammatical article. Formal?: " + colored(formality, formal_color))
+                    else:
+                        print(f"Enter the English word for " + colored(lword, lword_color) + " with the proper grammatical article. Formal?: " + colored(formality, formal_color))
                 else:
-                    print(f"Enter the {lang_name} word for " + colored(word, engword_color) + ". Formal?: " + colored(formality, formal_color))
-            else: # If it does
+                    if mode == 1:
+                        print(f"Enter the {lang_name} word for " + colored(word, engword_color) + ". Formal?: " + colored(formality, formal_color))
+                    else:
+                        print(f"Enter the English word for " + colored(lword, lword_color) + ". Formal?: " + colored(formality, formal_color))
+            else:
                 if articles == True:
-                    print(f"Enter the {lang_name} word for " + colored(word, engword_color) + " with the proper grammatical article.")
+                    if mode == 1:
+                        print(f"Enter the {lang_name} word for " + colored(word, engword_color) + " with the proper grammatical article.")
+                    else:
+                        print(f"Enter the English word for " + colored(lword, lword_color) + " with the proper grammatical article.")
                 else:
-                    print(f"Enter the {lang_name} word for " + colored(word, engword_color) + ".")
+                    if mode == 1:
+                        print(f"Enter the {lang_name} word for " + colored(word, engword_color) + " with the proper grammatical article.")
+                    else:
+                        print(f"Enter the English word for " + colored(lword, lword_color) + " with the proper grammatical article.")
 
             print(colored(" ╰─> ", input_color), end="")
 
@@ -255,188 +293,165 @@ def learn_words():
             if article not in ARTICLES_LIST:
                 articles = False
 
-            if True: # idk why I added this
-                # If articles are enabled and the user hasn't tried to use a hint/exit
-                if articles == True and usrinput != "hint" and usrinput != "exit":
-                    # If the word that the user is article+word, i.e. "el pan"
-                    if usrinput == article + " " + lword.lower():
-                        print(colored("Correct", correct_color) + "!")
-                        break
-                    else:
-                        lword_nochange = lword
-                        lword = list(lword)
-
-                        for i in range(0, len(lword)):
-                            if lword[i] in ["í", "ì", "ï", "ó", "ò", "ö",
-                                            "é", "è", "ë", "á", "à", "ä",
-                                            "ú", "ù", "ü", "ß", "ı", "ç", "ş",
-                                            "Í", "Ì", "Ï", "Ó", "Ò", "Ö",
-                                            "É", "È", "Ë", "Á", "À", "Ä",
-                                            "Ú", "Ù", "Ü", "ẞ", "İ", "Ç", "Ş"]:
-                                if lword[i] in ["Í", "Ì", "Ï"]:
-                                    lword[i] = "I"
-                                elif lword[i] in ["Ó", "Ò", "Ö"]:
-                                    lword[i] = "O"
-                                elif lword[i] in ["É", "È", "Ë"]:
-                                    lword[i] = "E"
-                                elif lword[i] in ["Á", "À", "Ä"]:
-                                    lword[i] = "A"
-                                elif lword[i] in ["Ú", "Ù", "Ü"]:
-                                    lword[i] = "U"
-                                elif lword[i] == "ẞ":
-                                    lword[i] = "SS"
-                                elif lword[i] == "İ":
-                                    lword[i] = "I"
-                                elif lword[i] == "Ç":
-                                    lword[i] = "C"
-                                elif lword[i] == "Ş":
-                                    lword[i] = "S"
-                                elif lword[i] in ["ó", "ò", "ö"]:
-                                    lword[i] = "o"
-                                elif lword[i] in ["é", "è", "ë"]:
-                                    lword[i] = "e"
-                                elif lword[i] in ["á", "à", "ä"]:
-                                    lword[i] = "a"
-                                elif lword[i] in ["ú", "ù", "ü"]:
-                                    lword[i] = "u"
-                                elif lword[i] == "ß":
-                                    lword[i] = "ss"
-                                elif lword[i] == "ı":
-                                    lword[i] = "i"
-                                elif lword[i] == "ç":
-                                    lword[i] = "c"
-                                elif lword[i] == "ş":
-                                    lword[i] = "s"
-                        lword = ''.join(lword)
-
-                        if usrinput.lower() == article.lower() + lword.lower():
-                            print(colored("Correct", correct_color) + "!" + " The correct word was " + colored(lword_nochange, lword_nochange_color) + ".")
-                            break
-                        else:
-                            try_number += 1 # Increment try_number by 1
-
-                            if try_number <= 2: # If try_number hasn't reached 3
-                                print(colored("Incorrect", error_color) + ". Try again.")
-                            else: # Else, tell the user the word
-                                print(colored("Incorrect", error_color) + ". The right answer was: " + colored(article, article_color), colored(lword, lword_color))
-                                break
-                # If articles are disabled AND the user hasn't tried to use a hint/exit
-                elif articles == False and usrinput != "hint" and usrinput != "exit":
-                    if usrinput == lword.lower():
-                        print(colored("Correct", correct_color) + "!")
-                        break
-                    else:
-                        lword_nochange = lword
-                        lword = list(lword)
-
-                        for i in range(0, len(lword)):
-                            if lword[i] in ["í", "ì", "ï", "ó", "ò", "ö",
-                                            "é", "è", "ë", "á", "à", "ä",
-                                            "ú", "ù", "ü", "ß", "ı", "ç", "ş",
-                                            "Í", "Ì", "Ï", "Ó", "Ò", "Ö",
-                                            "É", "È", "Ë", "Á", "À", "Ä",
-                                            "Ú", "Ù", "Ü", "ẞ", "İ", "Ç", "Ş"]:
-                                if lword[i] in ["Í", "Ì", "Ï"]:
-                                    lword[i] = "I"
-                                elif lword[i] in ["Ó", "Ò", "Ö"]:
-                                    lword[i] = "O"
-                                elif lword[i] in ["É", "È", "Ë"]:
-                                    lword[i] = "E"
-                                elif lword[i] in ["Á", "À", "Ä"]:
-                                    lword[i] = "A"
-                                elif lword[i] in ["Ú", "Ù", "Ü"]:
-                                    lword[i] = "U"
-                                elif lword[i] == "ẞ":
-                                    lword[i] = "SS"
-                                elif lword[i] == "İ":
-                                    lword[i] = "I"
-                                elif lword[i] == "Ç":
-                                    lword[i] = "C"
-                                elif lword[i] == "Ş":
-                                    lword[i] = "S"
-                                elif lword[i] in ["ó", "ò", "ö"]:
-                                    lword[i] = "o"
-                                elif lword[i] in ["é", "è", "ë"]:
-                                    lword[i] = "e"
-                                elif lword[i] in ["á", "à", "ä"]:
-                                    lword[i] = "a"
-                                elif lword[i] in ["ú", "ù", "ü"]:
-                                    lword[i] = "u"
-                                elif lword[i] == "ß":
-                                    lword[i] = "ss"
-                                elif lword[i] == "ı":
-                                    lword[i] = "i"
-                                elif lword[i] == "ç":
-                                    lword[i] = "c"
-                                elif lword[i] == "ş":
-                                    lword[i] = "s"
-                        lword = ''.join(lword)
-
-                        if usrinput.lower() == lword.lower():
-                            print(colored("Correct", correct_color) + "!" + " The correct word was " + colored(lword_nochange, lword_nochange_color) + ".")
-                            break
-                        else:
-                            try_number += 1 # Increment try_number by 1
-
-                            if try_number <= 2: # If try_number hasn't reached 3
-                                print(colored("Incorrect", error_color) + ". Try again.")
-                            else: # Else, tell the user the word
-                                print(colored("Incorrect", error_color) + ". The right answer was: " + colored(lword, lword_color))
-                                break
-                elif usrinput == "hint":
-                    hints = 3
-                    # I honestly don't even understand what this does
-                    if len(lword) <= hints:
-                        hints = len(lword) - 1
-                    else:
-                        pass
-
-                    if hint_number < hints:
-                        print(colored("Hint", hint_color) + f": {lword[hint_number]}")
-                        hint_number += 1
-                    else:
-                        print("No hints left")
-                elif usrinput == "exit":
-                    q = 1
-                    break
-                elif usrinput == "":
-                    try_number += 1 # Increment try_number by 1
-
-                    if try_number <= 2: # If try_number hasn't reached 3
-                        print(colored("Incorrect", error_color) + ". Try again.")
-                    else: # Else, tell the user the word
-                        print(colored("Incorrect", error_color) + ". The right answer was: " + colored(article, article_color), colored(lword, lword_color))
-                        break
-                else:
-                    print(usrinput, lword, word, hint_number, try_number, article, articles, formal, formality)
-            else:
-                if usrinput == lword.lower():
+            # If articles are enabled and the user hasn't tried to use a hint/exit
+            if articles == True and usrinput != "hint" and usrinput != "exit":
+                if usrinput == lword.lower() and mode == 1:
                     print(colored("Correct", correct_color) + "!")
                     break
-                elif usrinput == "hint":
-                    hints = 3
-
-                    if len(lword) <= hints:
-                        hints = len(lword) - 1
-                    else:
-                        pass
-
-                    if hint_number < hints:
-                        print(colored("Hint", hint_color) + f": {lword[hint_number]}")
-                        hint_number += 1
-                    else:
-                        print("No hints left")
-                elif usrinput == "exit":
-                    q = 1
+                elif usrinput == word.lower() and mode == 2:
+                    print(colored("Correct", correct_color) + "!")
                     break
                 else:
-                    try_number += 1
+                    lword_nochange = lword
+                    lword = list(lword)
 
-                    if try_number <= 2:
-                        print(colored("Incorrect", error_color) + ". Try again.")
-                    else:
-                        print(colored("Incorrect", error_color) + ". The right answer was: " + colored(lword, lword_color))
+                    for i in range(0, len(lword)):
+                        if lword[i] in ["í", "ì", "ï", "ó", "ò", "ö",
+                                        "é", "è", "ë", "á", "à", "ä",
+                                        "ú", "ù", "ü", "ß", "ı", "ç", "ş",
+                                        "Í", "Ì", "Ï", "Ó", "Ò", "Ö",
+                                        "É", "È", "Ë", "Á", "À", "Ä",
+                                        "Ú", "Ù", "Ü", "ẞ", "İ", "Ç", "Ş"]:
+                            if lword[i] in ["Í", "Ì", "Ï"]:
+                                lword[i] = "I"
+                            elif lword[i] in ["Ó", "Ò", "Ö"]:
+                                lword[i] = "O"
+                            elif lword[i] in ["É", "È", "Ë"]:
+                                lword[i] = "E"
+                            elif lword[i] in ["Á", "À", "Ä"]:
+                                lword[i] = "A"
+                            elif lword[i] in ["Ú", "Ù", "Ü"]:
+                                lword[i] = "U"
+                            elif lword[i] == "ẞ":
+                                lword[i] = "SS"
+                            elif lword[i] == "İ":
+                                lword[i] = "I"
+                            elif lword[i] == "Ç":
+                                lword[i] = "C"
+                            elif lword[i] == "Ş":
+                                lword[i] = "S"
+                            elif lword[i] in ["ó", "ò", "ö"]:
+                                lword[i] = "o"
+                            elif lword[i] in ["é", "è", "ë"]:
+                                lword[i] = "e"
+                            elif lword[i] in ["á", "à", "ä"]:
+                                lword[i] = "a"
+                            elif lword[i] in ["ú", "ù", "ü"]:
+                                lword[i] = "u"
+                            elif lword[i] == "ß":
+                                lword[i] = "ss"
+                            elif lword[i] == "ı":
+                                lword[i] = "i"
+                            elif lword[i] == "ç":
+                                lword[i] = "c"
+                            elif lword[i] == "ş":
+                                lword[i] = "s"
+                    lword = ''.join(lword)
+
+                    if usrinput.lower() == article.lower() + lword.lower():
+                        print(colored("Correct", correct_color) + "!" + " The correct word was " + colored(lword_nochange, lword_nochange_color) + ".")
                         break
+                    else:
+                        try_number += 1 # Increment try_number by 1
+
+                        if try_number <= 2: # If try_number hasn't reached 3
+                            print(colored("Incorrect", error_color) + ". Try again.")
+                        else: # Else, tell the user the word
+                            print(colored("Incorrect", error_color) + ". The right answer was: " + colored(article, article_color), colored(lword, lword_color))
+                            break
+            # If articles are disabled AND the user hasn't tried to use a hint/exit
+            elif articles == False and usrinput != "hint" and usrinput != "exit":
+                if usrinput == lword.lower() and mode == 1:
+                    print(colored("Correct", correct_color) + "!")
+                    break
+                elif usrinput == word.lower() and mode == 2:
+                    print(colored("Correct", correct_color) + "!")
+                    break
+                else:
+                    lword_nochange = lword
+                    lword = list(lword)
+
+                    for i in range(0, len(lword)):
+                        if lword[i] in ["í", "ì", "ï", "ó", "ò", "ö",
+                                        "é", "è", "ë", "á", "à", "ä",
+                                        "ú", "ù", "ü", "ß", "ı", "ç", "ş",
+                                        "Í", "Ì", "Ï", "Ó", "Ò", "Ö",
+                                        "É", "È", "Ë", "Á", "À", "Ä",
+                                        "Ú", "Ù", "Ü", "ẞ", "İ", "Ç", "Ş"]:
+                            if lword[i] in ["Í", "Ì", "Ï"]:
+                                lword[i] = "I"
+                            elif lword[i] in ["Ó", "Ò", "Ö"]:
+                                lword[i] = "O"
+                            elif lword[i] in ["É", "È", "Ë"]:
+                                lword[i] = "E"
+                            elif lword[i] in ["Á", "À", "Ä"]:
+                                lword[i] = "A"
+                            elif lword[i] in ["Ú", "Ù", "Ü"]:
+                                lword[i] = "U"
+                            elif lword[i] == "ẞ":
+                                lword[i] = "SS"
+                            elif lword[i] == "İ":
+                                lword[i] = "I"
+                            elif lword[i] == "Ç":
+                                lword[i] = "C"
+                            elif lword[i] == "Ş":
+                                lword[i] = "S"
+                            elif lword[i] in ["ó", "ò", "ö"]:
+                                lword[i] = "o"
+                            elif lword[i] in ["é", "è", "ë"]:
+                                lword[i] = "e"
+                            elif lword[i] in ["á", "à", "ä"]:
+                                lword[i] = "a"
+                            elif lword[i] in ["ú", "ù", "ü"]:
+                                lword[i] = "u"
+                            elif lword[i] == "ß":
+                                lword[i] = "ss"
+                            elif lword[i] == "ı":
+                                lword[i] = "i"
+                            elif lword[i] == "ç":
+                                lword[i] = "c"
+                            elif lword[i] == "ş":
+                                lword[i] = "s"
+                    lword = ''.join(lword)
+
+                    if usrinput.lower() == lword.lower():
+                        print(colored("Correct", correct_color) + "!" + " The correct word was " + colored(lword_nochange, lword_nochange_color) + ".")
+                        break
+                    else:
+                        try_number += 1 # Increment try_number by 1
+
+                        if try_number <= 2: # If try_number hasn't reached 3
+                            print(colored("Incorrect", error_color) + ". Try again.")
+                        else: # Else, tell the user the word
+                            print(colored("Incorrect", error_color) + ". The right answer was: " + colored(lword, lword_color))
+                            break
+            elif usrinput == "hint":
+                hints = 3
+                # I honestly don't even understand what this does
+                if len(lword) <= hints:
+                    hints = len(lword) - 1
+                else:
+                    pass
+
+                if hint_number < hints:
+                    print(colored("Hint", hint_color) + f": {lword[hint_number]}")
+                    hint_number += 1
+                else:
+                    print("No hints left")
+            elif usrinput == "exit":
+                q = 1
+                break
+            elif usrinput == "":
+                try_number += 1 # Increment try_number by 1
+
+                if try_number <= 2: # If try_number hasn't reached 3
+                    print(colored("Incorrect", error_color) + ". Try again.")
+                else: # Else, tell the user the word
+                    print(colored("Incorrect", error_color) + ". The right answer was: " + colored(article, article_color), colored(lword, lword_color))
+                    break
+            else:
+                print(usrinput, lword, word, hint_number, try_number, article, articles, formal, formality)
+
 
         if q == 1: # If the user typed "exit" then this will break the loop
             break
