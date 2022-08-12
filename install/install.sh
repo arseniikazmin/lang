@@ -19,7 +19,8 @@ if [[ $1 = install ]] || [[ $1 = uninstall ]]
 			echo
 			mkdir "/home/$2/.lang"
 			cp -r ./** "/home/$2/.lang"
-			cp ./lang /usr/bin/lang
+			touch /usr/bin/lang
+			printf "#!/bin/bash\npython3 $HOME/.lang/main.py" >> /usr/bin/lang
 			chmod +x /usr/bin/lang
 			chown $2 /home/$2/.lang/**
 			chgrp $2 /home/$2/.lang/**
