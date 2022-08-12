@@ -1,6 +1,6 @@
 EN,LA,Formal,Article
 Numbers,Zahlen,2,die
-One,Ein,2,none
+One,Eins,2,none
 Two,Zwei,2,none
 Three,Drei,2,none
 Four,Vier,2,none
@@ -28,3 +28,9 @@ Seventy,Siebzig,2,none
 Eighty,Achtzig,2,none
 Ninety,Neunzig,2,none
 Hundred,Hundert,2,none
+Thousand,Tausend,2,none
+Million,Million,2,none
+Billion,Milliarde,2,none
+Trillion,Billion,2,none
+Quadrillion,Billiarde,2,none
+Quintillion,Trillion,2,none
