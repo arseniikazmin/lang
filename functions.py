@@ -190,7 +190,9 @@ def learn_words():
         print("7. Numbers (extended)")
         if lang in ["de", "es", "ar"]:
             print("8. Countries")
-        print("9. Custom words")
+        if lang == "de":
+            print("9. Outside")
+        print("10. Custom words")
 
         # This asks for user's input and based on what they enter
         # the "name" variable will be changed. It is used for
@@ -223,6 +225,9 @@ def learn_words():
                 name = "countries"
                 break
             elif usrinput == "9":
+                name = "outside"
+                break
+            elif usrinput == "10":
                 name = "custom"
                 break
             elif usrinput == "exit":
@@ -282,9 +287,9 @@ def learn_words():
                         print(f"Enter the English word for " + colored(lword, lword_color) + " with the proper grammatical article.")
                 else:
                     if mode == 1:
-                        print(f"Enter the {lang_name} word for " + colored(word, engword_color) + " with the proper grammatical article.")
+                        print(f"Enter the {lang_name} word for " + colored(word, engword_color) + ".")
                     else:
-                        print(f"Enter the English word for " + colored(lword, lword_color) + " with the proper grammatical article.")
+                        print(f"Enter the English word for " + colored(lword, lword_color) + ".")
 
             print(colored(" ╰─> ", input_color), end="")
 
@@ -532,7 +537,9 @@ def view_words():
         print("7. Numbers (extended)")
         if lang in ["de", "es", "ar"]:
             print("8. Countries")
-        print("9. Custom words")
+        if lang == "de":
+            print("9. Outside")
+        print("10. Custom words")
 
         while True:
             usrinput = input(colored(" ==> ", input_color)).lower()
@@ -562,6 +569,9 @@ def view_words():
                 name = "countries"
                 break
             elif usrinput == "9":
+                name = "outside"
+                break
+            elif usrinput == "10":
                 name = "custom"
                 break
             elif usrinput == "clear":
