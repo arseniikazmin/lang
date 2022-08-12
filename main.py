@@ -31,28 +31,23 @@ if __name__ == "__main__":
         print("1. Learn words")
         print("2. View words")
         print("3. Add custom words")
-        print("4. Settings")
+        print("4. Help")
+        print("5. Settings")
         print("Type exit to quit.")
 
         usrinput = input(colored(" ==> ", "cyan"))
 
         if usrinput == "1":
             functions.learn_words()
-
         elif usrinput == "2":
             functions.view_words()
-
         elif usrinput == "3":
             functions.add_words()
-
         elif usrinput == "4":
-            functions.settings_change()
-
+            functions.help()
         elif usrinput == "exit" or usrinput == "quit":
             exit()
-
-        elif usrinput == "clear":
-            pass
-
+        elif usrinput == "5":
+            functions.settings_change()
         else:
             print(colored("error", "red") + f": {usrinput}: invalid option.")

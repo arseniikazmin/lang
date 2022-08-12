@@ -916,3 +916,72 @@ def settings_change():
 
         else:
             print(colored("error", error_color) + f": {usrinput}: ivalid choice.")
+
+def help():
+    while True:
+        clear()
+        print("\t === Help manual ===")
+        print("Type '6' or 'exit' to go back.", end="\n\n")
+        print(" 1. How does the program work?")
+        print(" 2. How do I add custom words?")
+        print(" 3. What if I am learning a language with a non-Roman")
+        print("    alphabet and don't have a specific keyboard?")
+        print(" 4. More about the programs functionality/commands")
+        print(" 5. Info about other languages/future features")
+        print(" 6. Go back")
+        usrinput = input(colored(" ==> ", input_color))
+        
+        if usrinput in ["1", "2", "3", "4", "5", "6", "exit"]:
+            if usrinput == "1":
+                clear()
+                print("This program is written in Python and uses CSV tables for words.")
+                print("Every row in CSV has a word in English and in the foreign language you want to study.")
+                print("Then there is the formality of the word (whether you use it with friends/colleagues")
+                print("or in situations such as meetings/people who are older) and the grammatical article")
+                print("(i.e. der, die, das; equivalent of the English 'the'). For example, in German all nouns")
+                print("have a gender and the article depends on it. It is very important to learn it as there")
+                print("is no 100% way to guess the gender of a word in German.")
+                input("Press ENTER to continue...")
+            elif usrinput == "2":
+                clear()
+                print("You can add your own words in the main menu.")
+                print("Navigate to the main menu, then choose the 'Add custom words' option.")
+                print("You will need to choose the language where you want to add the word.")
+                print("Then, the program will ask you for the English word and then the word")
+                print("in the language you chose.")
+                print("You will then be asked whether the word is formal/informal/doesn't matter")
+                print("and the correct article (i.e. der, die, das).")
+                print("Additional info: if you want to cancel the process, type '!back'.")
+                input("Press ENTER to continue...")
+            elif usrinput == "3":
+                clear()
+                print("If you are learning a language that uses a writing system other than the Roman alphabet,")
+                print("you can go to settings and choose 'Change mode'.")
+                print("There are two modes. The first one is when you enter the word in the language you are")
+                print("learning. The second one is when you are entering the word in English.")
+                print("This is extremely useful when you don't have a proper keyboard installed.")
+                input("Press ENTER to continue...")
+            elif usrinput == "4":
+                clear()
+                print("There are some commands you can enter while learning words.")
+                print(" 'clear' - clear the screen,")
+                print(" 'hint' - get a hint. There are 3 available hints for each word,")
+                print(" 'exit' - exit to the main menu")
+                input("Press ENTER to continue...")
+            elif usrinput == "5":
+                clear()
+                print("This program currently has 4 languages:")
+                print("  - Arabic")
+                print("  - German")
+                print("  - Spanish")
+                print("  - Turkish", end="\n\n")
+                print("In the future, these languages will be added:")
+                print("  - French")
+                print("  - Ukrainian", end="\n\n")
+                print("However, languages that are already available will still be worked on.")
+                print("Primarily German, but I will try adding more words to others.")
+                input("Press ENTER to continue...")
+            elif usrinput == "6" or usrinput == "exit":
+                break
+        else:
+            print("Invalid input")
