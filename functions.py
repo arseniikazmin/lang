@@ -42,7 +42,7 @@ correct_color = ""
 incorrect_color = ""
 hint_color = ""
 
-with open("gamefiles/settings.json", "r", encoding="utf-8") as f:
+with open(DIR_PATH + "/gamefiles/settings.json", "r", encoding="utf-8") as f:
         config = json.load(f)
 
         header_color = config["colors"]["header_color"]
@@ -735,7 +735,7 @@ def add_words():
             else:
                 return
 
-            with open(f"languages/{lang}/custom.csv", 'a') as f:
+            with open(DIR_PATH + f"/languages/{lang}/custom.csv", 'a') as f:
                 f.write(f"\n{enword},{lword},{formality},{article}")
 
             print("Word successfully added!")

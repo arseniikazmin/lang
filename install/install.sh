@@ -18,9 +18,9 @@ if [[ $1 = install ]] || [[ $1 = uninstall ]]
 			echo " ADD  program files - ~/.lang/"
 			echo
 			mkdir "/home/$2/.lang"
-			cp -r ./** "/home/$2/.lang"
+			cp -r ../** "/home/$2/.lang"
 			touch /usr/bin/lang
-			printf "#!/bin/bash\npython3 $HOME/.lang/main.py" >> /usr/bin/lang
+			printf "#!/bin/bash\npython3 /home/$2/.lang/main.py" >> /usr/bin/lang
 			chmod +x /usr/bin/lang
 			chown $2 /home/$2/.lang/**
 			chgrp $2 /home/$2/.lang/**
@@ -42,8 +42,8 @@ if [[ $1 = install ]] || [[ $1 = uninstall ]]
 	fi
 else
 	echo "lang: bad usage"
-	echo "example: sudo ./install.sh install $USER"
-	echo "example: sudo ./install.sh uninstall $USER"
+	echo "example: sudo ./install.sh install \$USER"
+	echo "example: sudo ./install.sh uninstall \$USER"
 	printf "i, install\t\tinstall\n"
 	printf "u, uninstall\t\tuninstall\n"
 fi
