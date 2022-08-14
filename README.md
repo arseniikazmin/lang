@@ -17,6 +17,7 @@ lang is a language learning program to learn, repeat and view words. All words a
 - Arabic 🇪🇬
 - German 🇩🇪
 - Spanish 🇪🇸🇲🇽
+- Ukrainian 🇺🇦
 - Turkish 🇹🇷
 
 ## Running the program
