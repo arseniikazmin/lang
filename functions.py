@@ -103,34 +103,46 @@ def learn_words():
     elif settings_file["def_lang"] == "es":
         lang = "es"
         lang_name = "Spanish"
-    elif settings_file["def_lang"] == "ar":
-        lang = "ar"
-        lang_name = "Arabic"
+    elif settings_file["def_lang"] == "ar" or settings_file["def_lang"] == "ua":
+        if settings_file["def_lang"] == "ar":
+            lang = "ar"
+            lang_name = "Arabic"
+        elif settings_file["def_lang"] == "ua":
+            lang = "ua"
+            lang_name = "Ukrainian"
 
         if settings_file["mode"] != 2:
-            print("It seems that you are learning Arabic.")
-            print("Would you like to the second mode (entering the English word as an answer)?")
-            print("You can permanently turn this on in the settings.")
-            print("This way you can learn if you don't have an Arabic keyboard.\n [Y/n] ", end="")
+            print("It seems that you are learning a language that uses a non-Roman alphabet.")
+            print("Would you like to switch the second mode (entering the English word as an answer)?")
+            print("This way you can learn if you don't have another keyboard.\n [Y/n] ", end="")
             usrinput = input(colored("==> ", "cyan")).lower()
 
             if usrinput == "" or usrinput == "y" or usrinput == "yes":
                 settings_file["mode"] = 2
                 settings("save", settings_file)
-                print("Mode successfully changed to 2.")
     else:
         print("Select language:")
-        print("1. Turkish")
+        print("1. Arabic")
         print("2. German")
         print("3. Spanish")
-        print("4. Arabic")
+        print("4. Ukrainian")
+        print("5. Turkish")
 
         while True:
             usrinput = input(colored(" ==> ", input_color)).lower()
 
-            if usrinput == "1" or usrinput == "turkish":
-                lang = "tr"
-                lang_name = "Turkish"
+            if usrinput == "1" or usrinput == "arabic":
+                lang = "ar"
+                lang_name = "Arabic"
+                if settings_file["mode"] != 2:
+                    print("It seems that you are learning a language that uses a non-Roman alphabet.")
+                    print("Would you like to switch the second mode (entering the English word as an answer)?")
+                    print("This way you can learn if you don't have another keyboard.\n [Y/n] ", end="")
+                    usrinput = input(colored("==> ", "cyan")).lower()
+
+                    if usrinput == "" or usrinput == "y" or usrinput == "yes":
+                        settings_file["mode"] = 2
+                        settings("save", settings_file)
                 break
 
             elif usrinput == "2" or usrinput == "german":
@@ -143,31 +155,34 @@ def learn_words():
                 lang_name = "Spanish"
                 break
 
-            elif usrinput == "4" or usrinput == "arabic":
-                lang = "ar"
-                lang_name = "Arabic"
+            elif usrinput == "4" or usrinput == "ukrainian":
+                lang = "ua"
+                lang_name = "Ukrainian"
 
                 if settings_file["mode"] != 2:
-                    print("It seems that you are learning Arabic.")
-                    print("Would you like to set your mode to 2 (entering the English word as an answer)?")
-                    print("You can permanently turn this on in the settings.")
-                    print("This way you can learn if you don't have an Arabic keyboard.\n [Y/n] ", end="")
+                    print("It seems that you are learning a language that uses a non-Roman alphabet.")
+                    print("Would you like to switch the second mode (entering the English word as an answer)?")
+                    print("This way you can learn if you don't have another keyboard.\n [Y/n] ", end="")
                     usrinput = input(colored("==> ", "cyan")).lower()
 
                     if usrinput == "" or usrinput == "y" or usrinput == "yes":
                         settings_file["mode"] = 2
                         settings("save", settings_file)
-                        print("Mode successfully changed to 2.")
-
+                break
+            
+            elif usrinput == "5" or usrinput == "turkish":
+                lang = "tr"
+                lang_name = "Turkish"
                 break
 
             elif usrinput == "clear":
                 clear()
                 print("Select language:")
-                print("1. Turkish")
+                print("1. Arabic")
                 print("2. German")
                 print("3. Spanish")
-                print("4. Arabic")
+                print("4. Ukrainian")
+                print("5. Turkish")
 
             elif usrinput == "exit":
                 q = 1
@@ -179,7 +194,7 @@ def learn_words():
         if q == 1:
             return
 
-    if lang in ["tr", "de", "es", "ar"]: # Technically this should always be executed
+    if lang in ["tr", "de", "es", "ar", "ua"]: # Technically this should always be executed
         print("Choose a category: ")
         print("1. All words")
         print("2. Colours")
@@ -188,9 +203,9 @@ def learn_words():
         print("5. Months")
         print("6. Numbers")
         print("7. Numbers (extended)")
-        if lang in ["de", "es", "ar"]:
+        if lang in ["de", "es", "ar", "ua"]:
             print("8. Countries")
-        if lang == "de":
+        if lang in ["de", "ua"]:
             print("9. Outside")
         print("10. Custom words")
 
@@ -221,10 +236,10 @@ def learn_words():
             elif usrinput == "7":
                 name = "numbers_full"
                 break
-            elif usrinput == "8" and lang in ["de", "es", "ar"]:
+            elif usrinput == "8" and lang in ["de", "es", "ar", "ua"]:
                 name = "countries"
                 break
-            elif usrinput == "9":
+            elif usrinput == "9" and lang in ["de", "ua"]:
                 name = "outside"
                 break
             elif usrinput == "10":
@@ -353,7 +368,7 @@ def learn_words():
                                 lword[i] = "s"
                     lword_change = ''.join(lword_change)
 
-                    if usrinput.lower() == article.lower() + lword_change.lower():
+                    if usrinput.lower() == article.lower() + lword_change.lower() or usrinput.lower() == lword.lower():
                         print(colored("Correct", correct_color) + "!" + " The correct word was " + colored(lword_change, lword_nochange_color) + ".")
                         break
                     else:
@@ -419,7 +434,7 @@ def learn_words():
                                 lword_change[i] = "s"
                     lword_change = ''.join(lword_change)
 
-                    if usrinput.lower() == lword_change.lower():
+                    if usrinput.lower() == lword_change.lower() or usrinput.lower() == lword.lower():
                         print(colored("Correct", correct_color) + "!" + " The correct word was " + colored(lword_change, lword_nochange_color) + ".")
                         break
                     else:
@@ -432,14 +447,17 @@ def learn_words():
                             break
             elif usrinput == "hint":
                 hints = 3
-                # I honestly don't even understand what this does
+                
                 if len(lword) <= hints:
                     hints = len(lword) - 1
                 else:
                     pass
 
                 if hint_number < hints:
-                    print(colored("Hint", hint_color) + f": {lword[hint_number]}")
+                    if settings_file["mode"] == 1:
+                        print(colored("Hint", hint_color) + f": {lword[hint_number]}")
+                    else:
+                        print(colored("Hint", hint_color) + f": {word[hint_number]}")
                     hint_number += 1
                 else:
                     print("No hints left")
@@ -471,31 +489,35 @@ def view_words():
     settings_file = settings("load")
 
     # The same chunk of code learn_words() has.
-    if settings_file["def_lang"] == "tr":
-        lang = "tr"
-        lang_name = "Turkish"
+    if settings_file["def_lang"] == "ar":
+        lang = "ar"
+        lang_name = "Arabic"
     elif settings_file["def_lang"] == "de":
         lang = "de"
         lang_name = "German"
     elif settings_file["def_lang"] == "es":
         lang = "es"
         lang_name = "Spanish"
-    elif settings_file["def_lang"] == "ar":
-        lang = "ar"
-        lang_name = "Arabic"
+    elif settings_file["def_lang"] == "ua":
+        lang = "ua"
+        lang_name = "Ukrainian"
+    elif settings_file["def_lang"] == "tr":
+        lang = "tr"
+        lang_name = "Turkish"
     else:
         print("Select language:")
-        print("1. Turkish")
+        print("1. Arabic")
         print("2. German")
         print("3. Spanish")
-        print("4. Arabic")
+        print("4. Ukrainian")
+        print("5. Turkish")
 
         while True:
             usrinput = input(colored(" ==> ", input_color)).lower()
 
-            if usrinput == "1" or usrinput == "turkish":
-                lang = "tr"
-                lang_name = "Turkish"
+            if usrinput == "1" or usrinput == "arabic":
+                lang = "ar"
+                lang_name = "Arabic"
                 break
             elif usrinput == "2" or usrinput == "german":
                 lang = "de"
@@ -505,17 +527,22 @@ def view_words():
                 lang = "es"
                 lang_name = "Spanish"
                 break
-            elif usrinput == "4" or usrinput == "arabic":
-                lang = "ar"
-                lang_name = "Arabic"
+            elif usrinput == "4" or usrinput == "ukrainian":
+                lang = "ua"
+                lang_name = "Ukrainian"
+                break
+            elif usrinput == "5" or usrinput == "turkish":
+                lang = "tr"
+                lang_name = "Turkish"
                 break
             elif usrinput == "clear":
                 clear()
                 print("Select language:")
-                print("1. Turkish")
+                print("1. Arabic")
                 print("2. German")
                 print("3. Spanish")
-                print("4. Arabic")
+                print("4. Ukrainian")
+                print("5. Turkish")
             elif usrinput == "exit":
                 q = 1
                 break
@@ -535,9 +562,9 @@ def view_words():
         print("5. Months")
         print("6. Numbers")
         print("7. Numbers (extended)")
-        if lang in ["de", "es", "ar"]:
+        if lang in ["de", "es", "ar", "ua"]:
             print("8. Countries")
-        if lang == "de":
+        if lang in ["de", "ua"]:
             print("9. Outside")
         print("10. Custom words")
 
@@ -565,10 +592,10 @@ def view_words():
             elif usrinput == "7":
                 name = "numbers_full"
                 break
-            elif usrinput == "8" and lang in ["de", "es", "ar"]:
+            elif usrinput == "8" and lang in ["de", "es", "ar", "ua"]:
                 name = "countries"
                 break
-            elif usrinput == "9":
+            elif usrinput == "9" and lang in ["de", "ua"]:
                 name = "outside"
                 break
             elif usrinput == "10":
@@ -577,10 +604,11 @@ def view_words():
             elif usrinput == "clear":
                 clear()
                 print("Select language:")
-                print("1. Turkish")
+                print("1. Arabic")
                 print("2. German")
                 print("3. Spanish")
-                print("4. Arabic")
+                print("4. Ukrainian")
+                print("5. Turkish")
             elif usrinput == "exit":
                 q = 1
                 break
@@ -633,17 +661,18 @@ def add_words():
         lang_name = "Arabic"
 
     print("Select language:")
-    print("1. Turkish")
+    print("1. Arabic")
     print("2. German")
     print("3. Spanish")
-    print("4. Arabic")
+    print("4. Ukrainian")
+    print("5. Turkish")
 
     while True:
         usrinput = input(colored(" ==> ", input_color)).lower()
 
-        if usrinput == "1" or usrinput == "turkish":
-            lang = "tr"
-            lang_name = "Turkish"
+        if usrinput == "1" or usrinput == "arabic":
+            lang = "ar"
+            lang_name = "Arabic"
             break
         elif usrinput == "2" or usrinput == "german":
             lang = "de"
@@ -653,9 +682,13 @@ def add_words():
             lang = "es"
             lang_name = "spanish"
             break
-        elif usrinput == "4" or usrinput == "arabic":
-            lang = "ar"
-            lang_name = "Arabic"
+        elif usrinput == "4" or usrinput == "ukrainian":
+            lang = "ua"
+            lang_name = "Ukrainian"
+            break
+        elif usrinput == "5" or usrinput == "turkish":
+            lang = "tr"
+            lang_name = "Turkish"
             break
         elif usrinput == "clear":
             clear()
@@ -679,7 +712,7 @@ def add_words():
     formality = 0 # Formality. 0 = no, 1 = yes, 2 = doesn't matter. Set to 0 by default
     article = ""
 
-    if lang in ["tr", "de", "es", "ar"]:
+    if lang in ["ar", "de", "es", "ua", "tr"]:
         print(colored("\x1B[3mi\x1B[0m", "green") + f": Enter an English word and then the {lang_name} counterpart afterwards.")
         print(colored("\x1B[3mi\x1B[0m", "green") + ": If you spelled a word incorrectly, you can type \"!back\". It will cancel the process.")
 
@@ -759,24 +792,13 @@ def settings_change():
 
         if usrinput == "1":
             print("Enter your preferred language")
-            usrinput = input(" [ES/de/ar/tr] " + colored("==> ", input_color)).lower()
+            usrinput = input(" [DE/es/ar/ua/tr] " + colored("==> ", input_color)).lower()
 
-            if usrinput == "tr" or usrinput == "turkish":
-                if usrinput == settings_file["def_lang"]:
-                    print("Your language is already set to Turkish (tr).")
-                    input("Press ENTER to go back...")
-
-                else:
-                    settings_file["def_lang"] = "tr"
-                    print("Successfully changed default language to Turkish (tr).")
-                    settings("save", settings_file)
-                    time.sleep(1.5)
-                break
-
-            elif usrinput == "de" or usrinput == "german":
+            if usrinput == "de" or usrinput == "german" or usrinput == "":
                 if usrinput == settings_file["def_lang"]:
                     print("Your language is already set to German (de).")
                     input("Press ENTER to go back...")
+
                 else:
                     settings_file["def_lang"] = "de"
                     print("Successfully changed default language to German (de).")
@@ -806,11 +828,33 @@ def settings_change():
                     time.sleep(1.5)
                 break
 
+            elif usrinput == "ua" or usrinput == "ukrainian":
+                if usrinput == settings_file["def_lang"]:
+                    print("Your language is already set to Ukrainian (ua).")
+                    input("Press ENTER to go back...")
+                else:
+                    settings_file["def_lang"] = "ua"
+                    print("Successfully changed default language to Ukrainian (ua).")
+                    settings("save", settings_file)
+                    time.sleep(1.5)
+                break
+            
+            elif usrinput == "tr" or usrinput == "turkish":
+                if usrinput == settings_file["def_lang"]:
+                    print("Your language is already set to Turkish (tr).")
+                    input("Press ENTER to go back...")
+                else:
+                    settings_file["def_lang"] = "tr"
+                    print("Successfully changed default language to Turkish (tr).")
+                    settings("save", settings_file)
+                    time.sleep(1.5)
+                break
+
             elif usrinput == "exit":
                 pass
 
             else:
-                print(colored("error", error_color) + f": {usrinput}: ivalid language number/name/code.")
+                print(colored("error", error_color) + f": {usrinput}: ivalid language name/code.")
 
         elif usrinput == "2":
             # This is set to 1 and if the user types y/yes/nothing it changes
@@ -925,7 +969,7 @@ def help():
         print(" 1. How does the program work?")
         print(" 2. How do I add custom words?")
         print(" 3. What if I am learning a language with a non-Roman")
-        print("    alphabet and don't have a specific keyboard?")
+        print("    alphabet and don't have a specific keyboard layout installed?")
         print(" 4. More about the programs functionality/commands")
         print(" 5. Info about other languages/future features")
         print(" 6. Go back")
