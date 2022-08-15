@@ -486,6 +486,7 @@ def view_words():
     global lang
     global lang_name
     q = 0
+    name = ""
     settings_file = settings("load")
 
     # The same chunk of code learn_words() has.
@@ -553,73 +554,72 @@ def view_words():
             return
 
 
-    if lang in ["tr", "de", "es"]: # This should also be always executed
-        print("Choose a category: ")
-        print("1. All words")
-        print("2. Colours")
-        print("3. Days")
-        print("4. Food")
-        print("5. Months")
-        print("6. Numbers")
-        print("7. Numbers (extended)")
-        if lang in ["de", "es", "ar", "ua"]:
-            print("8. Countries")
-        if lang in ["de", "ua"]:
-            print("9. Outside")
-        print("10. Custom words")
+    print("Choose a category: ")
+    print("1. All words")
+    print("2. Colours")
+    print("3. Days")
+    print("4. Food")
+    print("5. Months")
+    print("6. Numbers")
+    print("7. Numbers (extended)")
+    if lang in ["de", "es", "ar", "ua"]:
+        print("8. Countries")
+    if lang in ["de", "ua"]:
+        print("9. Outside")
+    print("10. Custom words")
 
-        while True:
-            usrinput = input(colored(" ==> ", input_color)).lower()
+    while True:
+        usrinput = input(colored(" ==> ", input_color)).lower()
 
-            if usrinput == "1":
-                name = "all"
-                break
-            elif usrinput == "2":
-                name = "colours"
-                break
-            elif usrinput == "3":
-                name = "days"
-                break
-            elif usrinput == "4":
-                name = "food"
-                break
-            elif usrinput == "5":
-                name = "months"
-                break
-            elif usrinput == "6":
-                name = "numbers"
-                break
-            elif usrinput == "7":
-                name = "numbers_full"
-                break
-            elif usrinput == "8" and lang in ["de", "es", "ar", "ua"]:
-                name = "countries"
-                break
-            elif usrinput == "9" and lang in ["de", "ua"]:
-                name = "outside"
-                break
-            elif usrinput == "10":
-                name = "custom"
-                break
-            elif usrinput == "clear":
-                clear()
-                print("Select language:")
-                print("1. Arabic")
-                print("2. German")
-                print("3. Spanish")
-                print("4. Ukrainian")
-                print("5. Turkish")
-            elif usrinput == "exit":
-                q = 1
-                break
-            else:
-                print(colored("error", error_color) + f": {usrinput}: invalid option.")
+        if usrinput == "1":
+            name = "all"
+            break
+        elif usrinput == "2":
+            name = "colours"
+            break
+        elif usrinput == "3":
+            name = "days"
+            break
+        elif usrinput == "4":
+            name = "food"
+            break
+        elif usrinput == "5":
+            name = "months"
+            break
+        elif usrinput == "6":
+            name = "numbers"
+            break
+        elif usrinput == "7":
+            name = "numbers_full"
+            break
+        elif usrinput == "8" and lang in ["de", "es", "ar", "ua"]:
+            name = "countries"
+            break
+        elif usrinput == "9" and lang in ["de", "ua"]:
+            name = "outside"
+            break
+        elif usrinput == "10":
+            name = "custom"
+            break
+        elif usrinput == "clear":
+            clear()
+            print("Select language:")
+            print("1. Arabic")
+            print("2. German")
+            print("3. Spanish")
+            print("4. Ukrainian")
+            print("5. Turkish")
+        elif usrinput == "exit":
+            q = 1
+            break
+        else:
+            print(colored("error", error_color) + f": {usrinput}: invalid option.")
 
 
-            words = load_words(lang, name)
+        words = load_words(lang, name)
 
-        if q == 1:
-            return
+    if q == 1:
+        return
 
     rows, fields = load_words(lang, name)
     articles = settings_file["grammatical_articles"]
@@ -746,14 +746,17 @@ def add_words():
             else:
                 formality = 2
             
-            print("Enter the grammatical article for the word. Enter !skip if there is no article.")
+            print("Enter the grammatical article for the word. Enter none if there is no article.")
             usrinput = input(" article ==> ")
-            if usrinput.lower() != "!skip":
-                article = usrinput
+            if usrinput.lower() != "none":
+                article = ""
 
             print(f"English word: {enword}")
             print(f"{lang_name} word: {lword}")
-            print(f"Formality: {formality}")
+            if formality != 2:
+                print(f"Formality: {formality}")
+            else:
+                print(f"Formality: doesn't matter")
 
             if article == "":
                 article = "none"
