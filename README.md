@@ -19,6 +19,7 @@ lang is a language learning program to learn, repeat and view words. All words a
 - Spanish 🇪🇸🇲🇽
 - Ukrainian 🇺🇦
 - Turkish 🇹🇷
+- French 🇫🇷
 
 ## Running the program
 First, install dependencies: `pip3 install -r requirements.txt`.  
