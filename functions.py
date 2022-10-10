@@ -1060,7 +1060,7 @@ def help():
                 input("Press ENTER to continue...")
             elif usrinput == "5":
                 clear()
-                print("This program currently has 5 languages:")
+                print("This program currently has 6 languages:")
                 print("  - Arabic")
                 print("  - German")
                 print("  - Spanish")
