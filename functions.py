@@ -7,7 +7,7 @@ import sys
 from termcolor import colored
 
 
-ARTICLES_LIST= "das", "die", "der", "el", "la", "lo", "los", "las", "ال"
+ARTICLES_LIST= "das", "die", "der", "el", "la", "lo", "los", "las", "ال", "la", "le", "l'", "les"
 # The clear() function uses this variable. If you are using Microsoft Windows,
 # you should either change it to "cls" or run the script inside a Powershell.
 CLEAR_FUNCTION = ""
@@ -103,6 +103,9 @@ def learn_words():
     elif settings_file["def_lang"] == "es":
         lang = "es"
         lang_name = "Spanish"
+    elif settings_file["def_lang"] == "fr":
+        lang = "fr"
+        lang_name = "French"
     elif settings_file["def_lang"] == "ar" or settings_file["def_lang"] == "ua":
         if settings_file["def_lang"] == "ar":
             lang = "ar"
@@ -127,6 +130,7 @@ def learn_words():
         print("3. Spanish")
         print("4. Ukrainian")
         print("5. Turkish")
+        print("6. French")
 
         while True:
             usrinput = input(colored(" ==> ", input_color)).lower()
@@ -174,6 +178,10 @@ def learn_words():
                 lang = "tr"
                 lang_name = "Turkish"
                 break
+            elif usrinput == "6" or usrinput == "french":
+                lang = "fr"
+                lang_name = "French"
+                break
 
             elif usrinput == "clear":
                 clear()
@@ -183,6 +191,7 @@ def learn_words():
                 print("3. Spanish")
                 print("4. Ukrainian")
                 print("5. Turkish")
+                print("6. French")
 
             elif usrinput == "exit":
                 q = 1
@@ -203,9 +212,9 @@ def learn_words():
         print("5. Months")
         print("6. Numbers")
         print("7. Numbers (extended)")
-        if lang in ["de", "es", "ar", "ua"]:
+        if lang in ["de", "es", "ar", "ua", "fr"]:
             print("8. Countries")
-        if lang in ["de", "ua"]:
+        if lang in ["de", "ua", "fr"]:
             print("9. Outside")
         print("10. Custom words")
 
@@ -236,10 +245,10 @@ def learn_words():
             elif usrinput == "7":
                 name = "numbers_full"
                 break
-            elif usrinput == "8" and lang in ["de", "es", "ar", "ua"]:
+            elif usrinput == "8" and lang in ["de", "es", "ar", "ua", "fr"]:
                 name = "countries"
                 break
-            elif usrinput == "9" and lang in ["de", "ua"]:
+            elif usrinput == "9" and lang in ["de", "ua", "fr"]:
                 name = "outside"
                 break
             elif usrinput == "10":
@@ -326,19 +335,19 @@ def learn_words():
                     list(lword_change)
 
                     for i in range(0, len(lword_change)):
-                        if lword_change[i] in ["í", "ì", "ï", "ó", "ò", "ö",
-                                        "é", "è", "ë", "á", "à", "ä",
-                                        "ú", "ù", "ü", "ß", "ı", "ç", "ş",
-                                        "Í", "Ì", "Ï", "Ó", "Ò", "Ö",
-                                        "É", "È", "Ë", "Á", "À", "Ä",
-                                        "Ú", "Ù", "Ü", "ẞ", "İ", "Ç", "Ş"]:
+                        if lword_change[i] in ["í", "ì", "ï", "ó", "ò", "ö", "ô",
+                                                "é", "è", "ë", "á", "à", "ä", "â",
+                                                "ú", "ù", "ü", "ß", "ı", "ç", "ş",
+                                                "Í", "Ì", "Ï", "Ó", "Ò", "Ö", "Ô",
+                                                "É", "È", "Ë", "Á", "À", "Ä", "Â",
+                                        "       Ú", "Ù", "Ü", "ẞ", "İ", "Ç", "Ş"]:
                             if lword_change[i] in ["Í", "Ì", "Ï"]:
                                 lword_change[i] = "I"
-                            elif lword_change[i] in ["Ó", "Ò", "Ö"]:
+                            elif lword_change[i] in ["Ó", "Ò", "Ö", "Ô"]:
                                 lword_change[i] = "O"
                             elif lword_change[i] in ["É", "È", "Ë"]:
                                 lword_change[i] = "E"
-                            elif lword_change[i] in ["Á", "À", "Ä"]:
+                            elif lword_change[i] in ["Á", "À", "Ä", "Â"]:
                                 lword_change[i] = "A"
                             elif lword_change[i] in ["Ú", "Ù", "Ü"]:
                                 lword_change[i] = "U"
@@ -350,11 +359,11 @@ def learn_words():
                                 lword_change[i] = "C"
                             elif lword_change[i] == "Ş":
                                 lword_change[i] = "S"
-                            elif lword_change[i] in ["ó", "ò", "ö"]:
+                            elif lword_change[i] in ["ó", "ò", "ö", "ô"]:
                                 lword_change[i] = "o"
                             elif lword_change[i] in ["é", "è", "ë"]:
                                 lword_change[i] = "e"
-                            elif lword_change[i] in ["á", "à", "ä"]:
+                            elif lword_change[i] in ["á", "à", "ä", "â"]:
                                 lword_change[i] = "a"
                             elif lword_change[i] in ["ú", "ù", "ü"]:
                                 lword_change[i] = "u"
@@ -392,19 +401,19 @@ def learn_words():
                     list(lword_change)
 
                     for i in range(0, len(lword)):
-                        if lword[i] in ["í", "ì", "ï", "ó", "ò", "ö",
-                                        "é", "è", "ë", "á", "à", "ä",
+                        if lword[i] in ["í", "ì", "ï", "ó", "ò", "ö", "ô",
+                                        "é", "è", "ë", "á", "à", "ä", "â",
                                         "ú", "ù", "ü", "ß", "ı", "ç", "ş",
-                                        "Í", "Ì", "Ï", "Ó", "Ò", "Ö",
-                                        "É", "È", "Ë", "Á", "À", "Ä",
+                                        "Í", "Ì", "Ï", "Ó", "Ò", "Ö", "Ô",
+                                        "É", "È", "Ë", "Á", "À", "Ä", "Â",
                                         "Ú", "Ù", "Ü", "ẞ", "İ", "Ç", "Ş"]:
                             if lword_change[i] in ["Í", "Ì", "Ï"]:
                                 lword_change[i] = "I"
-                            elif lword_change[i] in ["Ó", "Ò", "Ö"]:
+                            elif lword_change[i] in ["Ó", "Ò", "Ö", "Ô"]:
                                 lword_change[i] = "O"
                             elif lword_change[i] in ["É", "È", "Ë"]:
                                 lword_change[i] = "E"
-                            elif lword_change[i] in ["Á", "À", "Ä"]:
+                            elif lword_change[i] in ["Á", "À", "Ä", "Â"]:
                                 lword_change[i] = "A"
                             elif lword_change[i] in ["Ú", "Ù", "Ü"]:
                                 lword_change[i] = "U"
@@ -416,11 +425,11 @@ def learn_words():
                                 lword_change[i] = "C"
                             elif lword_change[i] == "Ş":
                                 lword_change[i] = "S"
-                            elif lword_change[i] in ["ó", "ò", "ö"]:
+                            elif lword_change[i] in ["ó", "ò", "ö", "ô"]:
                                 lword_change[i] = "o"
                             elif lword_change[i] in ["é", "è", "ë"]:
                                 lword_change[i] = "e"
-                            elif lword_change[i] in ["á", "à", "ä"]:
+                            elif lword_change[i] in ["á", "à", "ä", "â"]:
                                 lword_change[i] = "a"
                             elif lword_change[i] in ["ú", "ù", "ü"]:
                                 lword_change[i] = "u"
@@ -505,6 +514,9 @@ def view_words():
     elif settings_file["def_lang"] == "tr":
         lang = "tr"
         lang_name = "Turkish"
+    elif settings_file["def_lang"] == "fr":
+        lang = "fr"
+        lang_name = "French"
     else:
         print("Select language:")
         print("1. Arabic")
@@ -512,6 +524,7 @@ def view_words():
         print("3. Spanish")
         print("4. Ukrainian")
         print("5. Turkish")
+        print("6. French")
 
         while True:
             usrinput = input(colored(" ==> ", input_color)).lower()
@@ -536,6 +549,10 @@ def view_words():
                 lang = "tr"
                 lang_name = "Turkish"
                 break
+            elif usrinput == "6" or usrinput == "french":
+                lang = "fr"
+                lang_name = "French"
+                break
             elif usrinput == "clear":
                 clear()
                 print("Select language:")
@@ -544,6 +561,7 @@ def view_words():
                 print("3. Spanish")
                 print("4. Ukrainian")
                 print("5. Turkish")
+                print("6. French")
             elif usrinput == "exit":
                 q = 1
                 break
@@ -562,9 +580,9 @@ def view_words():
     print("5. Months")
     print("6. Numbers")
     print("7. Numbers (extended)")
-    if lang in ["de", "es", "ar", "ua"]:
+    if lang in ["de", "es", "ar", "ua", "fr"]:
         print("8. Countries")
-    if lang in ["de", "ua"]:
+    if lang in ["de", "ua", "fr"]:
         print("9. Outside")
     print("10. Custom words")
 
@@ -592,10 +610,10 @@ def view_words():
         elif usrinput == "7":
             name = "numbers_full"
             break
-        elif usrinput == "8" and lang in ["de", "es", "ar", "ua"]:
+        elif usrinput == "8" and lang in ["de", "es", "ar", "ua", "fr"]:
             name = "countries"
             break
-        elif usrinput == "9" and lang in ["de", "ua"]:
+        elif usrinput == "9" and lang in ["de", "ua", "fr"]:
             name = "outside"
             break
         elif usrinput == "10":
@@ -609,6 +627,7 @@ def view_words():
             print("3. Spanish")
             print("4. Ukrainian")
             print("5. Turkish")
+            print("6. French")
         elif usrinput == "exit":
             q = 1
             break
@@ -659,6 +678,12 @@ def add_words():
     elif settings_file["def_lang"] == "ar":
         lang = "ar"
         lang_name = "Arabic"
+    elif settings_file["def_lang"] == "ua":
+        lang = "ua"
+        lang_name = "Ukrainian"
+    elif settings_file["def_lang"] == "fr":
+        lang = "fr"
+        lang_name = "French"
 
     print("Select language:")
     print("1. Arabic")
@@ -666,6 +691,7 @@ def add_words():
     print("3. Spanish")
     print("4. Ukrainian")
     print("5. Turkish")
+    print("6. French")
 
     while True:
         usrinput = input(colored(" ==> ", input_color)).lower()
@@ -690,6 +716,10 @@ def add_words():
             lang = "tr"
             lang_name = "Turkish"
             break
+        elif usrinput == "6" or usrinput == "french":
+            lang = "fr"
+            lang_name = "French"
+            break
         elif usrinput == "clear":
             clear()
             print("Select language:")
@@ -697,6 +727,8 @@ def add_words():
             print("2. German")
             print("3. Spanish")
             print("4. Arabic")
+            print("5. Ukrainian")
+            print("6. French")
         elif usrinput == "exit":
             q = 1
             break
@@ -795,7 +827,7 @@ def settings_change():
 
         if usrinput == "1":
             print("Enter your preferred language")
-            usrinput = input(" [DE/es/ar/ua/tr] " + colored("==> ", input_color)).lower()
+            usrinput = input(" [DE/es/ar/ua/tr/fr] " + colored("==> ", input_color)).lower()
 
             if usrinput == "de" or usrinput == "german" or usrinput == "":
                 if usrinput == settings_file["def_lang"]:
@@ -849,6 +881,17 @@ def settings_change():
                 else:
                     settings_file["def_lang"] = "tr"
                     print("Successfully changed default language to Turkish (tr).")
+                    settings("save", settings_file)
+                    time.sleep(1.5)
+                break
+            
+            elif usrinput == "fr" or usrinput == "french":
+                if usrinput == settings_file["def_lang"]:
+                    print("Your language is already set to French (fr).")
+                    input("Press ENTER to go back...")
+                else:
+                    settings_file["def_lang"] = "fr"
+                    print("Successfully changed default language to French (fr).")
                     settings("save", settings_file)
                     time.sleep(1.5)
                 break
