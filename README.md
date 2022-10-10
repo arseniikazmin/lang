@@ -8,11 +8,6 @@ lang is a language learning program to learn, repeat and view words. All words a
 - Turning grammatical articles on/off
 - Turning formality display on/off
 
-## Operating systems
-- Windows (installation script doesn't work)
-- GNU/Linux (Arch Linux, should work on all Linux distributions)
-- macOS (never tested, installation script won't work, but the program itself might)
-
 ## Available languages:
 - Arabic 🇪🇬
 - German 🇩🇪
@@ -20,6 +15,11 @@ lang is a language learning program to learn, repeat and view words. All words a
 - Ukrainian 🇺🇦
 - Turkish 🇹🇷
 - French 🇫🇷
+
+## Operating systems
+- Windows (installation script doesn't work)
+- GNU/Linux (Arch Linux, should work on all Linux distributions)
+- macOS (never tested, installation script won't work, but the program itself might)
 
 ## Running the program
 First, install dependencies: `pip3 install -r requirements.txt`.  
