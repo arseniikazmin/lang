@@ -203,7 +203,7 @@ def learn_words():
         if q == 1:
             return
 
-    if lang in ["tr", "de", "es", "ar", "ua"]: # Technically this should always be executed
+    if True: # Technically this should always be executed
         print("Choose a category: ")
         print("1. All words")
         print("2. Colours")
